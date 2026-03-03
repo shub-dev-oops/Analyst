@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<!-- saved from url=(0086)https://confluence.granicus.com/plugins/viewsource/viewpagesrc.action?pageId=833749169 -->
+<html>
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>View Source</title>
+        <link rel="canonical" href="https://confluence.granicus.com/pages/viewpage.action?pageId=$action.page.id">
+        <script>
+                window.WRM = window.WRM || {}; window.WRM._unparsedData = window.WRM._unparsedData || {}; window.WRM._unparsedErrors = window.WRM._unparsedErrors || {};
+                WRM._unparsedData["com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path.context-path"] = "\u0022\u0022";
+                if (window.WRM._dataArrived) window.WRM._dataArrived();</script>
+        <link rel="stylesheet" href="./Feb2026_files/batch.css" data-wrm-key="_super" data-wrm-batch-type="context"
+                media="all">
+        <link rel="stylesheet" href="./Feb2026_files/batch(1).css" data-wrm-key="plugin.viewsource,-_super"
+                data-wrm-batch-type="context" media="all">
+        <link rel="stylesheet" href="./Feb2026_files/batch(2).css" data-wrm-key="page,-_super"
+                data-wrm-batch-type="context" media="all">
+        <link rel="stylesheet" href="./Feb2026_files/batch(3).css" data-wrm-key="editor-content,-_super"
+                data-wrm-batch-type="context" media="all">
+        <link rel="stylesheet" href="./Feb2026_files/colors.css" media="all">
+
+</head>
+
+<body class="mceContentBody aui-theme-default wiki-content fullsize">
+        <p>&nbsp;</p>
+        <h1>Feb 2026 - GovMeeting Incident Review</h1>
+        <p><strong>Last Updated:</strong> March 02, 2026</p>
+
+        <hr>
+        <h2><strong>Agenda:</strong></h2>
+        <table class="confluenceTable">
+                <tbody>
+                        <tr>
+                                <th class="confluenceTh">
+                                        <h4>-- <span style="color: rgb(0,0,255);">Incident review 1st February 2026 -
+                                                        28th February 2026</span></h4>
+                                        <pre>  - identify key improvement areas to reduce production incidents, Improve customer experience</pre>
+                                        <ul>
+                                                <li><a href="https://confluence.granicus.com/display/SRE/GovM+Action+Plan+for+Repeated+Sev+Incidents">GovM
+                                                                Action Plan for Repeated Sev Incidents</a></li>
+                                                <li><a href="https://confluence.granicus.com/pages/viewpage.action?pageId=586350808">GovM
+                                                                Engineering Feedback on APM 4xx/5xx/other Errors</a>
+                                                </li>
+                                        </ul>
+                                        <h4><strong>--</strong> <span style="color: rgb(0,0,255);">Meeting Notes &amp;
+                                                        Action Items from Last discussions</span></h4>
+                                        <h4>-- <span style="color: rgb(0,0,255);">identify monitoring gaps, Implement
+                                                        monitoring &amp; Alerting to reduce customer reported
+                                                        incidents</span></h4>
+                                        <ul>
+                                                <li><a href="https://confluence.granicus.com/display/SRE/GovM+Monitoring+Improvements+to+reduce+Customer+Reported+Tickets">GovM
+                                                                Monitoring Improvements to reduce Customer Reported
+                                                                Tickets</a></li>
+                                                <li><a href="https://confluence.granicus.com/display/SRE/GovM+SSL+Certs+Monitoring+on+Elastic">GovM
+                                                                SSL Certs Monitoring on Elastic</a></li>
+                                        </ul>
+                                        <h4>-- <span style="color: rgb(0,0,255);">SLO standards</span></h4>
+                                        <ul>
+                                                <li><a href="https://confluence.granicus.com/pages/viewpage.action?pageId=586482827">GovM
+                                                                : App Server Baseline Monitors &amp; SLO Thresholds for
+                                                                APM Golden signals</a></li>
+                                        </ul>
+                                        <p>--<span style="color: rgb(0,0,255);">Other improvements</span></p>
+                                        <ul>
+                                                <li><a href="https://confluence.granicus.com/pages/viewpage.action?pageId=575279043">GovM
+                                                                WAF Implementation: Insite/Legistar/MediaManager/Speakup
+                                                                (Ashburn)</a> - <span style="color: rgb(255,0,0);">Know
+                                                                Business PRIORITY</span></li>
+                                        </ul>
+                                </th>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h3>-- <span style="color: rgb(0,0,255);">Incident review 1st February 2026 - 28th February 2026</span></h3>
+        <h2><strong>Objective:</strong> Reduce Sev Incidents in production, Address Monitoring Gaps</h2>
+
+        <h2>Incident Volumes - GovM</h2>
+        <p><strong>Feb 2026 Incident Summary:</strong> 0 Sev 1 | 2 Sev 2 (OneMeeting Azure HTTP/2, Swagit Wowza Cache) |
+                3 Sev 3 (Speak Up MongoDB Spike, OneMeeting Compiler Queue, Speak Up Socket Flapping + Spam Traffic) | 2
+                Sev 4 (PeakAPI MySQL Deadlocks, IQM2 False Alarm/Monitoring Cleanup)</p>
+
+        <h2>Severity 1 Incidents</h2>
+        <table class="confluenceTable">
+                <tbody>
+                        <tr style="background-color: rgb(244,245,247);">
+                                <th class="confluenceTh">Application</th>
+                                <th class="confluenceTh">Root cause for Problem</th>
+                                <th class="confluenceTh">Remediation/Mitigation plan to avoid future Occurrence:</th>
+                                <th class="confluenceTh">Meeting Notes<br><small>Running notes on what happened, whether
+                                                it is done or blocked, who is blocking it, who needs to unblock it.
+                                                Updated continuously until issue is fully closed.</small></th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd" colspan="4" style="text-align:center; color: rgb(0,128,0);">
+                                        <strong>No Severity 1 incidents in February 2026.</strong>
+                                </td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h2>Severity 2 Incidents</h2>
+        <table class="confluenceTable">
+                <tbody>
+                        <tr style="background-color: rgb(244,245,247);">
+                                <th class="confluenceTh">Application</th>
+                                <th class="confluenceTh">Root cause for Problem</th>
+                                <th class="confluenceTh">Remediation/Mitigation plan to avoid future Occurrence:</th>
+                                <th class="confluenceTh">Meeting Notes<br><small>Running notes on what happened, whether
+                                                it is done or blocked, who is blocking it, who needs to unblock it.
+                                                Updated continuously until issue is fully closed.</small></th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>OneMeeting</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-117350"><strong>RUN-117350</strong></a>
+                                                / 5th Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(2)" data-macro-name="status"
+                                                        data-macro-id="e4049f05-f691-4eba-b8a8-6f46c1d27afe"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 2 status macro"
+                                                        data-macro-parameters="colour=Yellow|title=Sev 2"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(5)" data-macro-name="jira"
+                                                        data-macro-id="232931d2-39fb-4b9c-a508-f793f65150f0"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5686|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Follow-up:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(6)" data-macro-name="jira"
+                                                        data-macro-id="49dc7351-8744-4109-b79d-bafef1c3fce5"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=SA-133859|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(7)" data-macro-name="jira"
+                                                        data-macro-id="ca1ec728-ba3c-4688-8900-be1a66c7cc36"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=SRE-17741|server=Granicus Jira"
+                                                        data-macro-schema-version="1">
+                                        </p>
+                                        <p>Azure App Gateway platform update caused an HTTP/2 stream handling defect.
+                                                App Gateway advertised correct Content-Length (965,447 bytes) but
+                                                prematurely terminated stream after delivering only ~523,849 bytes
+                                                (45.7% data loss). All 6 backend servers healthy and returning complete
+                                                responses — truncation occurred exclusively at App Gateway
+                                                layer.<br><strong>Incident Start:</strong> 05/Feb/26 6:25 AM |
+                                                <strong>Awareness:</strong> 9:44 AM | <strong>Fixed:</strong> 6:30 PM |
+                                                <strong>MTTA: 199m / MTTR: 725m (12.1
+                                                        hrs)</strong><br><strong>Cause:</strong> Third Party
+                                                Defect<br><strong>Customers impacted:</strong> 22 customers — OKC, LA
+                                                City, Palo Alto, Miami Beach, Santa Clara County (Sev 2 override —
+                                                "escalating based on number of customer reports and importance of
+                                                impacted feature, which is both core and heavily
+                                                utilized").<br><br><strong>Ticket comments:</strong><br>&#8226;
+                                                <em>Chase House (SRE, 05/Feb/26):</em> Identified HTTP/2 truncation by
+                                                testing all 6 backend servers directly (all returned 965,447 bytes
+                                                complete) vs. through App Gateway (consistently ~523,849 bytes). Opened
+                                                Azure Support ticket 2602050030007972 with evidence.<br>&#8226;
+                                                <em>Azure:</em> Identified and rolled back platform-level changes to App
+                                                Gateways causing the issue. Post-rollback confirmed normal.<br>&#8226;
+                                                <em>DBA-9502</em> (MSSQL triage): DB layer confirmed healthy throughout
+                                                — not a DB issue.
+                                        </p>
+
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> SRE isolated the issue by testing
+                                        the API endpoint directly against all 6 backend servers (all returned complete
+                                        965,447-byte responses) vs. through the App Gateway (consistently truncated to
+                                        ~523,849 bytes). Identified the Content-Length mismatch in HTTP/2 response
+                                        headers. Opened Azure Support ticket 2602050030007972 and escalated with
+                                        evidence. Azure rolled back the platform-level App Gateway update (Feb 5 evening
+                                        CT), restoring normal service.<br><br><strong>Follow-up Actions:</strong><br>•
+                                        <strong>SA-133859</strong> (DevOps, Chitresh Das): Audit Cloudflare WAF rules to
+                                        prevent masking upstream vendor issues in future — <em>Status: Ready</em><br>•
+                                        <strong>SRE-17741</strong> (SRE, Unassigned): Create edge-vs-origin isolation
+                                        playbook to reduce triage time in similar incidents — <em>Status: Open</em>
+                                </td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(3)" data-macro-name="status"
+                                                data-macro-id="332cd3ce-0c80-4181-b11d-37be837165b7" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="3rd Party status macro"
+                                                data-macro-parameters="colour=Purple|title=3rd Party"
+                                                data-macro-schema-version="1"><br><strong>What happened:</strong> 22
+                                        customers (OKC, LA City, Palo Alto, Miami Beach, Santa Clara County) experienced
+                                        intermittent failures where tasks/forms/workflows returned HTTP 200 with
+                                        truncated JSON (965KB truncated to 523KB - 45.7% data loss). Azure App Gateway
+                                        HTTP/2 stream defect after platform update. 8h 53m war room (9:57 AM - 6:50 PM
+                                        CT).<br><strong>Follow-up:</strong> Azure Support ticket 2602050030007972
+                                        opened. Vendor rolled back App Gateway update evening of Feb 5. Formal Azure RCA
+                                        requested. SA-133859 (Cloudflare WAF audit), SRE-17741 (edge-vs-origin isolation
+                                        playbook) created.<br><strong>Blocker:</strong> None - resolved by Azure
+                                        rollback. Awaiting vendor RCA documentation.</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>Swagit</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-117686"><strong>RUN-117686</strong></a>
+                                                / 10th Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(2)" data-macro-name="status"
+                                                        data-macro-id="cd2886e9-2385-4616-b0e6-70c297d19b85"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 2 status macro"
+                                                        data-macro-parameters="colour=Yellow|title=Sev 2"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(9)" data-macro-name="jira"
+                                                        data-macro-id="ddbe26ef-b7af-4207-9143-ddf82fe6f6ca"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5734|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Problem:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(11)" data-macro-name="jira"
+                                                        data-macro-id="c6976639-5028-4e21-97a2-41d862e34d50"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RUN-117696|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> | <img
+                                                        class="editor-inline-macro" src="./Feb2026_files/macro(10)"
+                                                        data-macro-name="jira"
+                                                        data-macro-id="1c4e919e-14cd-48bd-a240-77e7c4efbfa8"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=SA-130780|server=Granicus Jira"
+                                                        data-macro-schema-version="1">
+                                        </p>
+                                        <p>Swagit Admin V3 failed to create video mastering points for new meetings due
+                                                to network/TCP connectivity failures between application and backend
+                                                services ('hlsjs-lite: Network error'). Coincided with cache saturation
+                                                and high volume utilization on Wowza/archive servers
+                                                (aasmp-wowarch1–aasmp-wowarch10). Restarting WowzaStreamingEngine
+                                                cleared cache and restored TCP connectivity.<br><strong>Incident
+                                                        Start:</strong> 10/Feb/26 7:08 PM | <strong>Awareness:</strong>
+                                                7:09 PM | <strong>Fixed:</strong> 7:42 PM | <strong>MTTA: 1m / MTTR:
+                                                        34m</strong><br><strong>Cause:</strong> Operational Capacity —
+                                                Wowza cache saturation<br><strong>Customers impacted:</strong> All
+                                                GovMeetings Swagit customers relying on same-day video posting. Kyle
+                                                White: "every indexer" impacted; multiple clients affected; customers
+                                                could not see newly recorded meetings posted during
+                                                window.<br><br><strong>Ticket comments:</strong><br>&#8226; <em>Kyle
+                                                        White (10/Feb/26):</em> "Indexers started reporting around 5:30
+                                                PM CT that we are getting 'hlsjs-lite: Network error' whenever we try to
+                                                Master any hours or when we select hours to try and Index. This is
+                                                affecting all clients in V3 as far as we can tell."<br>&#8226;
+                                                <em>Edrich Lewis (SRE, 10/Feb/26):</em> Restarted WowzaStreamingEngine
+                                                on all wowza servers aasmp-wowarch1 through aasmp-wowarch10. After
+                                                restart of service, issue was resolved.<br>&#8226; <em>Kyle White
+                                                        confirmed</em> indexers could successfully master and post
+                                                meeting videos post-restart.<br>&#8226; <em>SA-130780</em> (Jacob
+                                                Odell): MediaCache Config Optimization — waiting on updated Ubuntu 20.04
+                                                vSphere template (SA-133904). Existing SOP in place for manual cache
+                                                clearance.
+                                        </p>
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> SRE restarted WowzaStreamingEngine
+                                        service on all Wowza/archive servers (aasmp-wowarch1 through aasmp-wowarch10).
+                                        Cache cleared post-restart, TCP connectivity restored. Kyle White confirmed
+                                        indexers could successfully master and post meeting videos. Database tier was
+                                        healthy throughout the incident — issue was isolated to the Wowza application
+                                        layer.<br><br><strong>Follow-up Actions:</strong><br>•
+                                        <strong>SA-130780</strong> (DevOps, Jacob Odell): MediaCache Configuration
+                                        Optimization — investigate and implement permanent fix for Wowza /var/mediacache
+                                        partition to prevent future cache saturation. Existing SOP in place for manual
+                                        cache clearance. — <em>Status: Waiting on other (blocked on updated Ubuntu 20.04
+                                                vSphere template, SA-133904)</em><br>• <strong>RUN-117696</strong>
+                                        (Problem ticket, Unassigned): Track recurring Wowza/MediaCache cache saturation
+                                        and Admin V3 failures to identify patterns — <em>Status: Open</em>
+                                </td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(4)" data-macro-name="status"
+                                                data-macro-id="29f33136-83d7-40b8-8f90-e26bcee3b9bd" role="button"
+                                                tabindex="0" aria-haspopup="true"
+                                                aria-label="High Priority status macro"
+                                                data-macro-parameters="colour=Red|title=High Priority"
+                                                data-macro-schema-version="1"><br><strong>What happened:</strong> Every
+                                        Swagit indexer impacted on busiest day (Tuesday). Admin V3 failed to master/post
+                                        same-day meeting videos for 2h 15m (5:30-7:45 PM CST). Network errors ("no route
+                                        to host") coincided with Wowza/archive servers running cache &gt;100%.
+                                        Previously posted content remained available.<br><strong>Follow-up:</strong>
+                                        SA-130780 (MediaCache/Wowza storage tuning) assigned to Jacob Odell. RUN-117696
+                                        (Problem ticket) tracking recurring cache issues. Existing SOP used for service
+                                        restart.<br><strong>Blocker:</strong> None - incident resolved. Long-term
+                                        storage optimization in progress.</td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h2>Severity 3 Incidents</h2>
+        <table class="confluenceTable">
+                <tbody>
+                        <tr style="background-color: rgb(244,245,247);">
+                                <th class="confluenceTh">Application</th>
+                                <th class="confluenceTh">Root cause for Problem</th>
+                                <th class="confluenceTh">Remediation/Mitigation plan to avoid future Occurrence:</th>
+                                <th class="confluenceTh">Meeting Notes<br><small>Running notes on what happened, whether
+                                                it is done or blocked, who is blocking it, who needs to unblock it.
+                                                Updated continuously until issue is fully closed.</small></th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>Speak Up</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-117083"><strong>RUN-117083</strong></a>
+                                                / 3rd Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(5)" data-macro-name="status"
+                                                        data-macro-id="db0b1759-cffb-4241-9188-493448215436"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 3 status macro"
+                                                        data-macro-parameters="colour=Yellow|title=Sev 3"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(13)" data-macro-name="jira"
+                                                        data-macro-id="34529060-7f95-4272-9066-06847523352b"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5667|server=Granicus Jira"
+                                                        data-macro-schema-version="1"></p>
+                                        <p>SpeakUp webserver high CPU utilization due to slow MongoDB ideas find query
+                                                for Controller/profile/comments transaction. Legitimate traffic from
+                                                denver.granicusideas.com caused spike.<br><strong>Incident
+                                                        Start:</strong> 03/Feb/26 5:07 AM | <strong>Awareness:</strong>
+                                                5:08 AM | <strong>Fixed:</strong> 5:13 AM | <strong>MTTA: 1m / MTTR:
+                                                        6m</strong><br><strong>Cause:</strong> Operational
+                                                Capacity<br><strong>Customers impacted:</strong> No — Performance
+                                                Degradation, product available. Non-peak hours.<br><br><strong>Ticket
+                                                        comments:</strong><br>&#8226; <em>Shrikant Dandge
+                                                        (03/Feb/26):</em> "The traffic looks legitimate as the origin of
+                                                top transactions were from denver.granicusideas.com. Need some
+                                                investigation from MongoDB side between period 5:09 AM CDT to 5:11 CDT."
+                                                Slow query: Total duration: 74,144 ms | Call count: 66 | GET_MORE on
+                                                civicideas-us-production.ideas collection
+                                                (cursor_id=98860241024).<br>&#8226; <em>Shrikant Dandge
+                                                        (03/Feb/26):</em> "There was a spike in incoming requests on
+                                                speakup webservers. Controller/profile/comments transaction was
+                                                slowest." NR APM data confirmed.<br>&#8226; <em>Vijayeendra Kolhapur
+                                                        (03/Feb/26):</em> "Alert cleared as soon as the incident was
+                                                generated."<br>&#8226; <strong>SpeakUp monitored on New Relic
+                                                        only</strong> — Sheldon Rampton is sole NR access holder for
+                                                investigation. Known monitoring gap.</p>
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> Auto-resolved within 6 minutes of
+                                        alert. No manual intervention was required. Monitoring performed as designed —
+                                        alert cleared as soon as system recovered.<br><br><strong>Root cause
+                                                context:</strong> MongoDB ideas find query (GET_MORE on
+                                        civicideas-us-production.ideas collection) took 74,144ms total across 66 calls —
+                                        likely a cursor exhaustion scenario under high legitimate
+                                        traffic.<br><br><strong>Follow-up:</strong> Investigate adding a MongoDB
+                                        slow-query alert specific to the Controller/profile/comments transaction to
+                                        provide earlier warning. SpeakUp is still monitored via New Relic (not yet on
+                                        Elastic). Only Sheldon Rampton has NR access for investigation — this is a known
+                                        monitoring gap.</td>
+                                <td class="confluenceTd"><strong>Status: ✅ DONE
+                                                (auto-resolved)</strong><br><br><strong>What happened:</strong> Feb 3,
+                                        5:07–5:13 AM CT. Spike in legitimate traffic from denver.granicusideas.com hit
+                                        SpeakUp webservers. MongoDB query for Controller/profile/comments transaction
+                                        spiked to 74.1s total duration (66 calls), causing high CPU and brief service
+                                        degradation. Reported internally by monitor (PagerDuty). MTTA: 1m / MTTR:
+                                        6m.<br><br><strong>Is it done?</strong> Yes — auto-resolved. Alert cleared
+                                        within 6 minutes.<br><strong>Blocked?</strong> No immediate blocker. However,
+                                        long-term: SpeakUp is not yet on Elastic (still NR-only), meaning root cause
+                                        investigation requires Sheldon Rampton's NR access. This is an open monitoring
+                                        gap.<br><strong>Who is blocking?</strong> NR decommission is on hold — SpeakUp
+                                        onboarding to Elastic not yet done.<br><strong>Who needs to unblock?</strong>
+                                        DevOps / RS DevOps team to onboard SpeakUp APM to Elastic.</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>OneMeeting</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-117121"><strong>RUN-117121</strong></a>
+                                                / 3rd Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(5)" data-macro-name="status"
+                                                        data-macro-id="4f8eab22-df25-4f16-b6bb-720444e75cac"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 3 status macro"
+                                                        data-macro-parameters="colour=Yellow|title=Sev 3"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(15)" data-macro-name="jira"
+                                                        data-macro-id="7bed55f9-00ee-422d-840f-441ddc9dfa58"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5668|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Problem:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(19)" data-macro-name="jira"
+                                                        data-macro-id="ef231fa6-2c3d-41a4-a2bb-2f4efc561b1d"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RUN-117742|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> | <img
+                                                        class="editor-inline-macro" src="./Feb2026_files/macro(16)"
+                                                        data-macro-name="jira"
+                                                        data-macro-id="fed71975-837d-4f67-a0df-064f293a171a"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=SA-133857|server=Granicus Jira"
+                                                        data-macro-schema-version="1">
+                                        </p>
+                                        <p>Human-triggered overload from migration activities. Migration engineer re-ran
+                                                compile jobs multiple times when UI did not reflect progress. Two
+                                                separate solutions run in parallel. Internal API has no throttling
+                                                (compiler checks only every 10s). Caused massive queue backlog — 300+
+                                                compiles vs. normal &lt;50 — delaying all Green2
+                                                customers.<br><strong>Incident Start:</strong> 03/Feb/26 9:37 AM |
+                                                <strong>Awareness:</strong> 9:38 AM | <strong>Fixed:</strong> 10:38 AM |
+                                                <strong>MTTA: 1m / MTTR: 61m</strong><br><strong>Cause:</strong>
+                                                Operational Process<br><strong>Customers impacted:</strong> Yes — subset
+                                                of Green2 customers (Miami Beach, OKC, others). Performance degradation
+                                                1–3 hrs. Reported by customer. Sev 3.<br><br><strong>Ticket
+                                                        comments:</strong><br>&#8226; <em>Keerthi Kanneganti
+                                                        (10/Feb/26):</em> "Just confirming that a throttle has been
+                                                added for the internal API calls. In addition, the migration engineers
+                                                have been trained on using the PGWest tool to monitor compile activity
+                                                and avoid unintentionally re-triggering jobs." (Wrike
+                                                #4368518206)<br>&#8226; <em>Carmelo Vargas (06/Feb/26):</em> Follow-up
+                                                tickets created — SA-133857 (API throttling), SRE-17751 (queue
+                                                monitoring), SRE-17771 (Azure Storage Queue monitoring), RUN-117742
+                                                (problem ticket).<br>&#8226; <em>Vijayeendra Kolhapur (20/Feb/26):</em>
+                                                Requested closure of RUN ticket. <em>(13/Feb/26):</em> Same request to
+                                                Sheldon Rampton.
+                                        </p>
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> Queue drained naturally to 0 during
+                                        the incident call through normal processing. Migration activity was paused by
+                                        Keerthi Kanneganti and Amala Prasanna (Implementation Team) after cause was
+                                        confirmed. No config or code changes were made during the
+                                        incident.<br><br><strong>Follow-up Actions:</strong><br>•
+                                        <strong>SA-133857</strong> (Cloud Team, Kowsalya Gowthaman): Add API throttling
+                                        + guardrails for internal migration API calls to prevent re-trigger floods —
+                                        <em>Status: Open</em><br>• <strong>SRE-17751</strong> (SRE, Unassigned): Add
+                                        compile queue depth/latency monitoring and dashboards — <em>Status: Open /
+                                                UNASSIGNED — needs owner</em><br>• <strong>SRE-17771</strong> (SRE,
+                                        Sheldon Rampton): Azure Storage Queue monitoring for OneMeeting compiler —
+                                        <em>Status: Waiting on other (blocked on SA-122891)</em><br>•
+                                        <strong>RUN-117742</strong> (Problem ticket, Unassigned): Ensure
+                                        migration-driven queue floods cannot recur — <em>Status:
+                                                Open</em><br><br><strong>Key lesson:</strong> Internal migration API has
+                                        no throttling; compiler checks only every 10s. Engineers re-triggered because UI
+                                        shows no progress. PGWest tool training should help prevent future occurrences.
+                                </td>
+                                <td class="confluenceTd"><strong>Status: 🔄 IN PROGRESS (action items
+                                                pending)</strong><br><br><strong>What happened:</strong> Feb 3,
+                                        ~9:37–10:38 AM CT. Migration engineer re-triggered compile jobs multiple times
+                                        (UI showed no progress), running 2 solutions in parallel, flooding the Green2
+                                        compile queue to 300+ jobs (normal &lt;50). Only 1 customer report, no data
+                                        loss, queue drained naturally to 0 during call. MTTA: 60m / MTTR:
+                                        61m.<br><br><strong>Is it done?</strong> Throttling for internal API calls was
+                                        implemented (confirmed by Keerthi Kanneganti, Wrike #4368518206). Training done.
+                                        However, 3 monitoring gap tickets remain open.<br><strong>Blocked?</strong>
+                                        Partially — SRE-17771 (Azure Queue monitoring) is blocked on SA-122891 (Azure
+                                        function dependency). SRE-17751 is unassigned.<br><strong>Who is
+                                                blocking?</strong> SA-122891 (Azure function dependency) blocking
+                                        SRE-17771. No owner for SRE-17751.<br><strong>Who needs to unblock?</strong>
+                                        Sheldon Rampton / Team lead to assign SRE-17751. DevOps to close SA-122891
+                                        dependency.</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>Speak Up</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-117382"><strong>RUN-117382</strong></a>
+                                                / 5th Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(5)" data-macro-name="status"
+                                                        data-macro-id="2d8d3118-31ab-4fe6-8f82-8785cd059d71"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 3 status macro"
+                                                        data-macro-parameters="colour=Yellow|title=Sev 3"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(21)" data-macro-name="jira"
+                                                        data-macro-id="397e957c-291f-4d7c-b32b-acf2bada084d"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5689|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Related:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(22)" data-macro-name="jira"
+                                                        data-macro-id="6798c57d-4901-4e12-9e43-873c22ef3e5e"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RUN-119192|server=Granicus Jira"
+                                                        data-macro-schema-version="1">
+                                        </p>
+                                        <p>Host went unhealthy and self-recovered (flapping). Target 500s and socket
+                                                errors appeared during brief connectivity degradation. Spike in traffic
+                                                related to spam content was the underlying trigger.<br><strong>Incident
+                                                        Start:</strong> 05/Feb/26 5:25 PM | <strong>Awareness:</strong>
+                                                5:26 PM | <strong>Fixed:</strong> 5:29 PM | <strong>MTTA: 1m / MTTR:
+                                                        4m</strong><br><strong>Cause:</strong> Granicus Software Defect
+                                                — spike in traffic overloaded application<br><strong>Customers
+                                                        impacted:</strong> No — Downgraded to Sev 3 since
+                                                latency/flapping and customers could hit refresh to access pages. IC
+                                                Reviewer: Chris Nigh.<br><br><strong>Ticket
+                                                        comments:</strong><br>&#8226; <em>Piyush Kalawatiya
+                                                        (06/Feb/26):</em> "host went unhealthy and came healthy again.
+                                                So after this target 500s started coming and socket issue
+                                                appeared."<br>&#8226; <em>Piyush Kalawatiya (06/Feb/26):</em> Confirmed
+                                                auto-recovery. No manual action required.<br>&#8226;
+                                                <strong>Note:</strong> Same spam-traffic pattern recurred as RUN-119192
+                                                (27th Feb). Recurring pattern with no code-level fix in place.
+                                                Engineering required to implement spam-profile access blocking in
+                                                SpeakUp codebase.
+                                        </p>
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> Auto-resolved. Host self-recovered
+                                        without manual intervention. Alert cleared after brief unhealthy period.
+                                        Downgraded to Sev 3 since customers could hit refresh to access pages — no full
+                                        outage confirmed.<br><br><strong>Context:</strong> Host went unhealthy and
+                                        recovered (flapping behavior). Target 500s and socket errors appeared during
+                                        brief connectivity degradation. Spike in traffic related to spam content was the
+                                        contributing trigger.<br><br><strong>Follow-up:</strong> No specific action
+                                        items filed. The same spam-traffic pattern recurred later (see RUN-119192 row
+                                        below). Long-term fix requires code changes to SpeakUp to block spam profile
+                                        access at the application layer.</td>
+                                <td class="confluenceTd"><strong>Status: ✅ DONE
+                                                (auto-resolved)</strong><br><br><strong>What happened:</strong> Feb 5,
+                                        5:25–5:29 PM CT. Host went unhealthy and recovered (flapping). Target 500s and
+                                        socket errors observed. Spike in traffic related to spam content was the
+                                        trigger. Only 1 engineer (Piyush Kalawatiya) observed; auto-resolved before
+                                        bridge could act. MTTA: 1m / MTTR: 4m. IC Reviewer: Chris
+                                        Nigh.<br><br><strong>Is it done?</strong> Yes — auto-resolved in 4 minutes. No
+                                        manual intervention.<br><strong>Blocked?</strong> No immediate blocker. However,
+                                        spam-driven overload is a recurring pattern with no code-level fix in
+                                        place.<br><strong>Who is blocking?</strong> No systemic fix — SpeakUp
+                                        application does not block old spam profile page access even if users are
+                                        banned.<br><strong>Who needs to unblock?</strong> Engineering team to implement
+                                        spam-profile access restrictions in SpeakUp codebase (long-term fix).</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>Speak Up</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-119192"><strong>RUN-119192</strong></a>
+                                                / 27th Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(5)" data-macro-name="status"
+                                                        data-macro-id="7e80baf8-b4c3-419a-9e28-eaa3335dcf82"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 3 status macro"
+                                                        data-macro-parameters="colour=Yellow|title=Sev 3"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(23)" data-macro-name="jira"
+                                                        data-macro-id="cc1db601-02c8-4388-90a3-061e83d7f698"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5899|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Related:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(20)" data-macro-name="jira"
+                                                        data-macro-id="e3ae11cb-1aab-4a30-8181-2da938468fc1"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RUN-117382|server=Granicus Jira"
+                                                        data-macro-schema-version="1">
+                                        </p>
+                                        <p>Excessive traffic from spam users caused performance degradation and brief
+                                                outage in SpeakUp. Profile#comments transactions spiked from &lt;0.5s to
+                                                &gt;2s average (individual requests: 20–45s). Old spam linkspam profiles
+                                                (manhattan.granicusideas.com, irvine.granicusideas.com) accessible even
+                                                though Ideas/Comments features disabled — blocking spam users at account
+                                                level does NOT prevent their profile pages being
+                                                accessed.<br><strong>Incident Start:</strong> 27/Feb/26 ~4:10 PM CST |
+                                                <strong>Fixed:</strong> ~4:17 PM CST | <strong>MTTA: 7m / MTTR:
+                                                        7m</strong><br><strong>Cause:</strong> Granicus Software Defect
+                                                — same spam pattern as RUN-117382 (Feb 5)<br><strong>Customers
+                                                        impacted:</strong> No — Sev 3. Duplicate alerts fired from both
+                                                Pingdom (RUN-119192) and Elastic synthetics (RUN-119193) — alert
+                                                deduplication gap.<br><br><strong>Root cause
+                                                        details:</strong><br>&#8226; Old spam linkspam profiles remain
+                                                publicly accessible even after features disabled — design flaw in
+                                                SpeakUp<br>&#8226; Blocking spam users at account level does NOT prevent
+                                                profile page access<br>&#8226; SpeakUp still on New Relic only (not
+                                                Elastic) — NR decommission on hold<br>&#8226; This is the 3rd
+                                                spam-pattern incident in Feb (RUN-117083, RUN-117382, RUN-119192). Same
+                                                root cause each time. Only code-level fix or application replacement
+                                                resolves this permanently.
+                                        </p>
+
+                                <td class="confluenceTd"><strong>Immediate:</strong> Auto-resolved when spam traffic
+                                        subsided. No manual intervention was required or performed. System
+                                        self-recovered within 7 minutes.<br><br><strong>Identified contributing
+                                                factors:</strong><br>• Old spam linkspam profiles (Manhattan Beach,
+                                        Irvine CA) remain publicly accessible even after Ideas/Comments features
+                                        disabled — design flaw<br>• Blocking spam users at the account level does NOT
+                                        prevent their profile pages from being accessed<br>• Duplicate alerts fired from
+                                        both Pingdom (RUN-119192) and Elastic synthetics (RUN-119193) — alert
+                                        deduplication gap<br><br><strong>Follow-up Actions:</strong><br>• Evaluate
+                                        eliminating Pingdom OR Elastic synthetics for SpeakUp to remove duplicate
+                                        alerting<br>• Long-term plan exists to replace SpeakUp application entirely —
+                                        this is the only complete fix for recurring spam-driven overload<br>• SpeakUp is
+                                        the only GovM app still on New Relic (not yet on Elastic). NR decommission is on
+                                        hold.</td>
+                                <td class="confluenceTd"><strong>Status: ⚠️ STRUCTURALLY OPEN (recurring
+                                                risk)</strong><br><br><strong>What happened:</strong> Feb 27 (~4:10–4:17
+                                        PM CST). Profile#comments transactions spiked from &lt;0.5s to &gt;2s average
+                                        response time (individual requests: 20–45s). Spam users with old linkspam
+                                        content (manhattan.granicusideas.com, irvine.granicusideas.com) caused excessive
+                                        load. Even after Ideas/Comments features disabled, old spam profiles remain
+                                        publicly accessible. Duplicate alerts from Pingdom (RUN-119192) and Elastic
+                                        synthetics (RUN-119193). MTTA: 7m / MTTR: 7m.<br><br><strong>Is it
+                                                done?</strong> Auto-resolved, but no systemic fix deployed. Same pattern
+                                        as RUN-117382 (Feb 5). Risk of recurrence is HIGH.<br><strong>Blocked?</strong>
+                                        Yes — preventing similar outages requires code-level changes to
+                                        SpeakUp.<br><strong>Who is blocking?</strong> Engineering team (no code changes
+                                        in flight for SpeakUp spam blocking). SpeakUp migration/replacement plan not yet
+                                        prioritized.<br><strong>Who needs to unblock?</strong> Product/Engineering
+                                        leadership to prioritize SpeakUp replacement or spam-access code fix. SRE:
+                                        Consolidate alerting to remove Pingdom/Elastic duplication.</td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h2>Severity 4 Incidents</h2>
+        <table class="confluenceTable">
+                <tbody>
+                        <tr style="background-color: rgb(244,245,247);">
+                                <th class="confluenceTh">Application</th>
+                                <th class="confluenceTh">Root cause for Problem</th>
+                                <th class="confluenceTh">Remediation/Mitigation plan to avoid future Occurrence:</th>
+                                <th class="confluenceTh">Meeting Notes<br><small>Running notes on what happened, whether
+                                                it is done or blocked, who is blocking it, who needs to unblock it.
+                                                Updated continuously until issue is fully closed.</small></th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>Peak Agenda Management</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-119128"><strong>RUN-119128</strong></a>
+                                                / 25th Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(8)" data-macro-name="status"
+                                                        data-macro-id="9b6e08c3-466a-4ae2-8d12-110dc04732a6"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 4 status macro"
+                                                        data-macro-parameters="colour=Blue|title=Sev 4"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(25)" data-macro-name="jira"
+                                                        data-macro-id="80f2ef75-59e7-4f0d-b802-31a35f6a8853"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5886|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Follow-up:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(26)" data-macro-name="jira"
+                                                        data-macro-id="019e72ee-0979-47e7-ac5d-d9c8df8372c2"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=SRE-17888|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> | <img
+                                                        class="editor-inline-macro" src="./Feb2026_files/macro(27)"
+                                                        data-macro-name="jira"
+                                                        data-macro-id="d0c7ba81-1cf6-4ff8-8f4c-307a37da2450"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=DBA-9729|server=Granicus Jira"
+                                                        data-macro-schema-version="1">
+                                        </p>
+                                        <p>PeakAPI pods (k8s) crashed repeatedly due to MySQL deadlocks in delayed_jobs
+                                                table. Multiple pods (4) competing to DELETE same job records caused
+                                                database deadlocks. Error: "Mysql2::Error: Deadlock found when trying to
+                                                get lock; try restarting transaction." Pods auto-restarted via
+                                                Kubernetes (Exit Code 1). Known pre-existing issue — existed on VMs too
+                                                but k8s restart behavior makes it visible as repeated pod
+                                                restarts.<br><strong>Incident Start:</strong> 25/Feb/26 8:31 AM CT |
+                                                <strong>Awareness:</strong> 9:46 AM CT | <strong>Fixed:</strong> ~9:46
+                                                AM CT | <strong>MTTA: 75m / MTTR:
+                                                        75m</strong><br><strong>Cause:</strong> Operational Capacity —
+                                                delayed_jobs table deadlock contention<br><strong>Customers
+                                                        impacted:</strong> Zero — zero customer reports, zero Pingdom
+                                                failures. Internal job processing only (approval mailer, index jobs).
+                                                Sev 4. IC: Vijayeendra Kolhapur.<br><br><strong>Root cause
+                                                        context:</strong><br>&#8226; DBA-9729 (Bodavula Meghasai): MySQL
+                                                support investigation — cannot fix at DB layer alone per DBA. Fix
+                                                requires application-level changes in PeakAPI to separate worker pods
+                                                from web pods. <strong>Status: Done.</strong><br>&#8226; MRs pending
+                                                merge (Chitresh Das, DevOps): Separate worker pods from web pods, refine
+                                                execution patterns, implement zero-downtime enhancements.<br>&#8226;
+                                                SRE-17888 (Piyush Kalawatiya): Track recurring PeakAPI pod restarts with
+                                                monitoring. <strong>Status: Open.</strong>
+                                        </p>
+
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> Pods auto-restarted via Kubernetes
+                                        after each crash (Exit Code 1). No manual SRE action taken — no customer-facing
+                                        impact confirmed. MySQL deadlocks in delayed_jobs table are a known pre-existing
+                                        issue.<br><br><strong>Root cause context:</strong> Issue existed on VMs too but
+                                        didn't cause visible impact (no restart on crash). Kubernetes restart behavior
+                                        makes it visible as repeated pod restarts. The deadlock occurs when multiple
+                                        pods simultaneously DELETE the same job record.<br><br><strong>Follow-up
+                                                Actions:</strong><br>• <strong>MRs pending merge</strong> (DevOps,
+                                        Chitresh Das): Separate worker pods from web pods, refine execution patterns,
+                                        implement zero-downtime enhancements — these MRs directly address the deadlock
+                                        root cause<br>• <strong>SRE-17888</strong> (SRE, Piyush Kalawatiya): Track
+                                        recurring PeakAPI pod restarts with monitoring — <em>Status: Open</em><br>•
+                                        <strong>DBA-9729</strong> (DBA, Bodavula Meghasai): MySQL support investigation
+                                        for deadlock pattern — <em>Status: Done</em>
+                                </td>
+                                <td class="confluenceTd"><strong>Status: 🔄 IN PROGRESS (MRs pending
+                                                merge)</strong><br><br><strong>What happened:</strong> Feb 25, 8:31–9:16
+                                        AM CT. 4 PeakAPI pods (k8s) crashed repeatedly due to MySQL deadlocks in
+                                        delayed_jobs table. Multiple pods competing to DELETE same job records. Affected
+                                        internal jobs (approval mailer, index jobs) — zero customer reports, zero
+                                        Pingdom failures. CPU/memory healthy. Known issue from prior year. MTTA: 75m /
+                                        MTTR: 75m. IC: Vijayeendra Kolhapur.<br><br><strong>Is it done?</strong> No
+                                        permanent fix yet — MRs with the application-level fix are pending
+                                        merge.<br><strong>Blocked?</strong> Yes — fix requires application-level changes
+                                        (separate worker/web pods). Cannot be fixed at DB layer alone per DBA
+                                        assessment.<br><strong>Who is blocking?</strong> MR merge is pending — DevOps
+                                        (Chitresh Das) team owns the MRs.<br><strong>Who needs to unblock?</strong>
+                                        Chitresh Das / DevOps to merge the pending MRs for PeakAPI worker pod
+                                        separation.</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">
+                                        <p><strong>IQM2</strong></p>
+                                        <p><a href="https://jira.granicus.com/browse/RUN-118733"><strong>RUN-118733</strong></a>
+                                                / 21st Feb 2026</p>
+                                        <p><img class="editor-inline-macro" height="18" width="88"
+                                                        src="./Feb2026_files/placeholder(8)" data-macro-name="status"
+                                                        data-macro-id="4d15632a-7a5f-4b39-9b35-d1a59deabb6a"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="Sev 4 status macro"
+                                                        data-macro-parameters="colour=Blue|title=Sev 4"
+                                                        data-macro-schema-version="1"></p>
+                                </td>
+                                <td class="confluenceTd">
+                                        <p><strong>RCA:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(29)" data-macro-name="jira"
+                                                        data-macro-id="81a1db81-01de-4869-959f-21cca3c09564"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RCA-5854|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> &nbsp;|&nbsp;
+                                                <strong>Problem:</strong> <img class="editor-inline-macro"
+                                                        src="./Feb2026_files/macro(30)" data-macro-name="jira"
+                                                        data-macro-id="195924da-e1fb-4524-b62f-7564f174fe93"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=SA-134447|server=Granicus Jira"
+                                                        data-macro-schema-version="1"> | <img
+                                                        class="editor-inline-macro" src="./Feb2026_files/macro(31)"
+                                                        data-macro-name="jira"
+                                                        data-macro-id="8e138834-6ec7-40f1-b260-342724a1750a"
+                                                        role="button" tabindex="0" aria-haspopup="true"
+                                                        aria-label="jira macro"
+                                                        data-macro-parameters="key=RUN-118734|server=Granicus Jira"
+                                                        data-macro-schema-version="1"></p>
+                                        <p>Initial Sev 1 notification generated for four IQM2 Media legacy server
+                                                endpoints; reclassified to Sev 4 after confirming no customer impact.
+                                                Under CR-32949 ('IQM2 - Shut down EC2 instances, Block S3 data access,
+                                                Change Akamai FTP password'), 4 legacy IQM2 media servers
+                                                (mediamontreal1.iqm2.com and others) were decommissioned and replaced by
+                                                gasmp-wowstr15, gasmp-wowstr16, and aormp-wowstr17 under unified
+                                                MediaManager infrastructure. SDT was removed post-shutdown but Pingdom
+                                                monitors were NOT disabled — causing false alarms when servers became
+                                                unreachable as intended.<br><strong>Incident Start:</strong> 21/Feb/26 |
+                                                <strong>MTTA: 19m / MTTR: 19m</strong><br><strong>Cause:</strong>
+                                                Operational Process — monitors not cleaned up
+                                                post-decommission<br><strong>Customers impacted:</strong> None. No
+                                                customer impact. False alarm — Sev 4.<br><br><strong>Ticket
+                                                        comments:</strong><br>&#8226; <em>Shivananda Nayak
+                                                        (21/Feb/26):</em> "An initial Sev1 notification was generated
+                                                for four IQM2 Media endpoints; however, the incident was later
+                                                reclassified to Sev4 after confirming no customer impact."<br>&#8226;
+                                                <em>Chase House (21/Feb/26):</em> Confirmed the 4 legacy servers were
+                                                decommissioned under CR-32949. Servers taken offline
+                                                intentionally.<br>&#8226; <em>Sheldon Rampton (21/Feb/26):</em> Disabled
+                                                the 4 IQM2 Media endpoint alerts in Pingdom. Full removal scheduled for
+                                                Feb 23 during US business hours.<br>&#8226; SA-134447 (IQM2 legacy
+                                                monitoring cleanup): Created to track full Pingdom monitor removal.
+                                                <strong>Status: Open.</strong></p>
+                                </td>
+                                <td class="confluenceTd"><strong>Immediate:</strong> SRE (Sheldon Rampton) disabled the
+                                        4 IQM2 Media endpoint alerts in Pingdom. This stopped the false alarms. Full
+                                        removal was scheduled for Feb 23 during US business hours.<br><br><strong>Root
+                                                cause context:</strong> Under CR-32949, 4 legacy IQM2 media servers
+                                        (mediamontreal1.iqm2.com and others) were fully decommissioned and replaced by
+                                        gasmp-wowstr15, gasmp-wowstr16, and aormp-wowstr17 under unified MediaManager
+                                        infrastructure. SDT was removed post-shutdown but Pingdom monitors were NOT
+                                        disabled — resulting in false alarms when the servers were unreachable as
+                                        expected.<br><br><strong>Follow-up Actions:</strong><br>•
+                                        <strong>SA-134447</strong> (DevOps, Unassigned): Remove/disable remaining
+                                        Pingdom monitors for all decommissioned IQM2 servers — <em>Status:
+                                                Open</em><br>• <strong>RUN-118734</strong> (Problem ticket, Unassigned):
+                                        Validate monitoring cleanup is complete and no orphaned monitors remain —
+                                        <em>Status: Open</em><br>• <strong>Process improvement:</strong> Decommission
+                                        checklist should include explicit step to disable monitoring before or at same
+                                        time as SDT removal
+                                </td>
+                                <td class="confluenceTd"><strong>Status: 🔄 IN PROGRESS (cleanup
+                                                pending)</strong><br><br><strong>What happened:</strong> Feb 21,
+                                        ~1:47–2:06 AM CT. Pingdom triggered alerts for 4 IQM2 Media endpoints that had
+                                        already been decommissioned under CR-32949. Initial Sev 1 alert reclassified to
+                                        Sev 4 after Chase House confirmed zero customer impact — servers were
+                                        intentionally shut down, SDT removed, but monitors not disabled. MTTA: 19m /
+                                        MTTR: 19m. IC Reviewer: Shivananda Nayak.<br><br><strong>Is it done?</strong>
+                                        Partially — 4 Pingdom alerts disabled by Sheldon Rampton. Full removal and
+                                        validation (SA-134447, RUN-118734) still open.<br><strong>Blocked?</strong> No
+                                        hard blocker — both tickets are unassigned but not technically
+                                        blocked.<br><strong>Who is blocking?</strong> No one blocking — just unassigned
+                                        work.<br><strong>Who needs to unblock?</strong> DevOps lead to assign SA-134447
+                                        to someone for Pingdom cleanup. SRE lead to validate RUN-118734 and confirm no
+                                        orphaned monitors remain.</td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h2><strong>MTTA/MTTR (in Minutes)</strong></h2>
+
+        <table class="confluenceTable">
+                <tbody>
+                        <tr style="background-color: rgb(244,245,247);">
+                                <th class="confluenceTh">Issue key</th>
+                                <th class="confluenceTh">Severity</th>
+                                <th class="confluenceTh">Summary</th>
+                                <th class="confluenceTh">MTTA</th>
+                                <th class="confluenceTh">MTTR</th>
+                                <th class="confluenceTh">Product</th>
+                                <th class="confluenceTh">Meeting Notes</th>
+                        </tr>
+
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro" src="./Feb2026_files/macro(4)"
+                                                data-macro-name="jira"
+                                                data-macro-id="06d326be-ed2f-442a-b5a2-877954097e73" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117350|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 2</td>
+                                <td class="confluenceTd">Azure App Gateway HTTP/2 truncation - Tasks, forms, and
+                                        workflows failed</td>
+                                <td class="confluenceTd">199m</td>
+                                <td class="confluenceTd">725m</td>
+                                <td class="confluenceTd">OneMeeting</td>
+                                <td class="confluenceTd">Third party (Azure)</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro" src="./Feb2026_files/macro(8)"
+                                                data-macro-name="jira"
+                                                data-macro-id="4ec9fc27-0197-45d5-8605-f5f8473217a3" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117686|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 2</td>
+                                <td class="confluenceTd">Wowza Cache Saturation - Admin V3 mastering/indexing failed
+                                </td>
+                                <td class="confluenceTd">34m</td>
+                                <td class="confluenceTd">132m</td>
+                                <td class="confluenceTd">Swagit</td>
+                                <td class="confluenceTd">High priority - cache optimization in progress</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(12)" data-macro-name="jira"
+                                                data-macro-id="258e8708-7727-43fc-94ab-95108bd1cf73" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117083|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 3</td>
+                                <td class="confluenceTd">MongoDB Query Spike - Slow transaction times</td>
+                                <td class="confluenceTd">6m</td>
+                                <td class="confluenceTd">6m</td>
+                                <td class="confluenceTd">Speak Up</td>
+                                <td class="confluenceTd">Auto-resolved</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(14)" data-macro-name="jira"
+                                                data-macro-id="d6ff1f89-d6bf-429a-8a14-f86d171236b0" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117121|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 3</td>
+                                <td class="confluenceTd">Compiler Queue Flood - Migration engineer caused queue backlog
+                                </td>
+                                <td class="confluenceTd">60m</td>
+                                <td class="confluenceTd">61m</td>
+                                <td class="confluenceTd">OneMeeting</td>
+                                <td class="confluenceTd">Throttling implemented</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(20)" data-macro-name="jira"
+                                                data-macro-id="9b928885-d97d-42d5-abd5-f61a56a7fef1" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117382|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 3</td>
+                                <td class="confluenceTd">Socket Flapping - Brief host unhealthy period</td>
+                                <td class="confluenceTd">4m</td>
+                                <td class="confluenceTd">4m</td>
+                                <td class="confluenceTd">Speak Up</td>
+                                <td class="confluenceTd">Auto-resolved</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(22)" data-macro-name="jira"
+                                                data-macro-id="1e0d6814-d5cd-4dfc-8b68-4539ed783a51" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-119192|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 3</td>
+                                <td class="confluenceTd">Spam Traffic Spike - Excessive traffic causing brief outage
+                                </td>
+                                <td class="confluenceTd">7m</td>
+                                <td class="confluenceTd">7m</td>
+                                <td class="confluenceTd">Speak Up</td>
+                                <td class="confluenceTd">Auto-resolved</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(24)" data-macro-name="jira"
+                                                data-macro-id="fd790f76-5642-4d1f-94ec-32dac9383610" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-119128|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 4</td>
+                                <td class="confluenceTd">PeakAPI MySQL Deadlocks - Pod restarts</td>
+                                <td class="confluenceTd">75m</td>
+                                <td class="confluenceTd">75m</td>
+                                <td class="confluenceTd">Peak Agenda</td>
+                                <td class="confluenceTd">Fix in MRs - no customer impact</td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(28)" data-macro-name="jira"
+                                                data-macro-id="a94dad3c-32eb-4bcd-9d33-2bee10c82e46" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-118733|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Sev 4</td>
+                                <td class="confluenceTd">False Alarm - Pingdom alerts for decommissioned IQM2 servers
+                                </td>
+                                <td class="confluenceTd">19m</td>
+                                <td class="confluenceTd">19m</td>
+                                <td class="confluenceTd">IQM2</td>
+                                <td class="confluenceTd">Monitors disabled</td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h3><strong>-- <span style="color: rgb(0,0,255);">Meeting Notes &amp; Action Items (includes tasks from Previous
+                                discussions)</span></strong></h3>
+        <p><br></p>
+        <table class="confluenceTable">
+                <tbody>
+                        <tr style="background-color: rgb(244,245,247);">
+                                <th class="confluenceTh">Activity List</th>
+                                <th class="confluenceTh">Type</th>
+                                <th class="confluenceTh">Owner</th>
+                                <th class="confluenceTh">Remarks</th>
+                                <th class="confluenceTh">Running Notes<br><small>What happened, whether done or blocked,
+                                                who is blocking it, who needs to unblock it. Updated continuously until
+                                                issue fully closed.</small></th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(10)" data-macro-name="jira"
+                                                data-macro-id="1c4e919e-14cd-48bd-a240-77e7c4efbfa8" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SA-130780|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Infra</td>
+                                <td class="confluenceTd">Jacob Odell</td>
+                                <td class="confluenceTd">MediaCache/Wowza storage optimization to prevent cache
+                                        saturation</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(9)" data-macro-name="status"
+                                                data-macro-id="ee959f5a-6989-4ff9-b5e6-cd4201934485" role="button"
+                                                tabindex="0" aria-haspopup="true"
+                                                aria-label="Waiting on other status macro"
+                                                data-macro-parameters="colour=Yellow|title=Waiting on other"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(11)" data-macro-name="jira"
+                                                data-macro-id="c6976639-5028-4e21-97a2-41d862e34d50" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117696|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Problem</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(10)" data-macro-name="status"
+                                                data-macro-id="f78d5eb8-13d3-4d32-b220-69bf371aa488" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Unassigned status macro"
+                                                data-macro-parameters="colour=Grey|title=Unassigned"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Track recurring Wowza cache issues and Admin V3 failures</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="22e5557e-f8e8-4583-bdb2-6dd7cd15e53e" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(16)" data-macro-name="jira"
+                                                data-macro-id="fed71975-837d-4f67-a0df-064f293a171a" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SA-133857|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Dev</td>
+                                <td class="confluenceTd">Kowsalya Gowthaman</td>
+                                <td class="confluenceTd">API throttling + guardrails for migration workflows</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="fad7195a-ac00-41f6-aceb-70fc8eb8987c" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(17)" data-macro-name="jira"
+                                                data-macro-id="1a81e3c9-e76a-433b-8858-d345a5195c47" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SRE-17751|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Monitoring</td>
+                                <td class="confluenceTd">Unassigned</td>
+                                <td class="confluenceTd">Compile queue depth/latency alerting and dashboards</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="8cd1bc57-50a3-4de8-87ba-42f8f027469c" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(18)" data-macro-name="jira"
+                                                data-macro-id="4c4042a3-9b6d-4734-ad2f-1309869c0ba2" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SRE-17771|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Monitoring</td>
+                                <td class="confluenceTd">Sheldon Rampton</td>
+                                <td class="confluenceTd">Azure Storage Queue monitoring for OneMeeting compiler</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(9)" data-macro-name="status"
+                                                data-macro-id="c7c11cff-7c6e-4470-b77c-a8666442ff57" role="button"
+                                                tabindex="0" aria-haspopup="true"
+                                                aria-label="Waiting on other status macro"
+                                                data-macro-parameters="colour=Yellow|title=Waiting on other"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(19)" data-macro-name="jira"
+                                                data-macro-id="ef231fa6-2c3d-41a4-a2bb-2f4efc561b1d" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-117742|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Problem</td>
+                                <td class="confluenceTd">Unassigned</td>
+                                <td class="confluenceTd">Ensure migration-driven queue floods cannot recur</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="e09221db-d2aa-483b-9243-d726509e37f3" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro" src="./Feb2026_files/macro(6)"
+                                                data-macro-name="jira"
+                                                data-macro-id="49dc7351-8744-4109-b79d-bafef1c3fce5" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SA-133859|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">DevOps</td>
+                                <td class="confluenceTd">Chitresh Das</td>
+                                <td class="confluenceTd">Audit Cloudflare WAF rules to avoid masking vendor issues</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(12)" data-macro-name="status"
+                                                data-macro-id="7dd909d1-c43c-4782-a650-f3f85ee767d8" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Ready status macro"
+                                                data-macro-parameters="colour=Yellow|title=Ready"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro" src="./Feb2026_files/macro(7)"
+                                                data-macro-name="jira"
+                                                data-macro-id="ca1ec728-ba3c-4688-8900-be1a66c7cc36" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SRE-17741|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Docs</td>
+                                <td class="confluenceTd">Unassigned</td>
+                                <td class="confluenceTd">Create edge-vs-origin isolation playbook for rapid testing</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="3d424f63-549a-40b8-b2d1-bf6e5903c19a" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(26)" data-macro-name="jira"
+                                                data-macro-id="eec6e38f-e834-43b9-a71f-076ce95c97a9" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SRE-17888|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Monitoring</td>
+                                <td class="confluenceTd">Piyush Kalawatiya</td>
+                                <td class="confluenceTd">Track recurring PeakAPI pod restarts due to MySQL deadlocks
+                                </td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="b479b687-f254-4cb2-beb8-6a30786a515e" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(27)" data-macro-name="jira"
+                                                data-macro-id="e96e4a99-462c-42db-b55e-fcdd95dbb0c8" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=DBA-9729|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">DBA</td>
+                                <td class="confluenceTd">Bodavula Meghasai</td>
+                                <td class="confluenceTd">MySQL support for RUN-119128</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(6)" data-macro-name="status"
+                                                data-macro-id="ebb5f5fa-9e05-4948-8aa9-385eb5d94e2d" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Done status macro"
+                                                data-macro-parameters="colour=Green|title=Done"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(30)" data-macro-name="jira"
+                                                data-macro-id="6fb55da6-a028-4453-9a49-2dea5e6cf2b3" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=SA-134447|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">DevOps</td>
+                                <td class="confluenceTd">Unassigned</td>
+                                <td class="confluenceTd">Remove/disable Pingdom monitors for decommissioned IQM2 servers
+                                </td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="559b1c58-513d-4d83-bc87-1e8b8adffeae" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro"
+                                                src="./Feb2026_files/macro(31)" data-macro-name="jira"
+                                                data-macro-id="67580e74-51c3-4e04-b355-084d7dc1f334" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-118734|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Problem</td>
+                                <td class="confluenceTd">Unassigned</td>
+                                <td class="confluenceTd">Validate monitoring cleanup for IQM2 false positives</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(11)" data-macro-name="status"
+                                                data-macro-id="7a1b6e72-6885-4e68-a17d-f2225ced6f2d" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Open status macro"
+                                                data-macro-parameters="colour=Grey|title=Open"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><img class="editor-inline-macro" src="./Feb2026_files/macro(3)"
+                                                data-macro-name="jira"
+                                                data-macro-id="5f3cc785-e448-4b27-b094-4c0fee91f946" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="jira macro"
+                                                data-macro-parameters="key=RUN-119043|server=Granicus Jira"
+                                                data-macro-schema-version="1"></td>
+                                <td class="confluenceTd">Problem</td>
+                                <td class="confluenceTd">Unassigned</td>
+                                <td class="confluenceTd">Track livestream CDN pull server DOWN root cause</td>
+                                <td class="confluenceTd"><img class="editor-inline-macro" height="18" width="88"
+                                                src="./Feb2026_files/placeholder(13)" data-macro-name="status"
+                                                data-macro-id="96c0ffbc-6a55-4043-b9d2-56eaf64e2070" role="button"
+                                                tabindex="0" aria-haspopup="true" aria-label="Closed status macro"
+                                                data-macro-parameters="colour=Red|title=Closed"
+                                                data-macro-schema-version="1"></td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <h2>Monitoring Status &amp; Gaps</h2>
+        <p>Click here → <a
+                        href="https://granicus-my.sharepoint.com/:x:/r/personal/mohibul_hasan_granicus_com/_layouts/15/Doc.aspx?sourcedoc=%7B147CAC1B-510F-4851-921D-92A480F43D6F%7D&amp;file=Elastic%20dashboard%20updates.xlsx">Monitoring
+                        status</a></p>
+        <ul>
+                <li>Dashboard created for onboarded APMs and Infra. Monitors/Alerts set for baseline monitors for
+                        telemetry — more to add as we continue to learn and get requirements.</li>
+                <li>GovM Alerts/Monitors migrated from NR to Elastic — <strong>ongoing</strong>.</li>
+                <li>Network: NICs of hosts monitored on Elastic, DNS on heartbeat, Core tools infra (Load balancers,
+                        VCenter, etc.) on <strong>LM only</strong>.</li>
+                <li><span style="color: rgb(200,0,0);"><strong>SpeakUp not yet on Elastic.</strong> Still monitored on
+                                New Relic (<strong>NR decommission on hold !!</strong>). Old Ruby version incompatible
+                                with Elastic agent.</span></li>
+                <li><span style="color: rgb(200,0,0);"><strong>CoreDNS NOT monitored on Elastic</strong> — critical gap
+                                exposed by Jan Sev 1 incidents. SRE-17654 tracks addition of CoreDNS
+                                metrics/alerts.</span></li>
+                <li><span style="color: rgb(200,0,0);"><strong>Wowza/archive server cache utilization NOT
+                                        alerted</strong> — gap exposed by Feb 10 Swagit Sev 2. DevOps volume tuning in
+                                flight.</span></li>
+                <li><strong>Pingdom monitors not automatically cleaned up on server decommission</strong> — SA-134447 to
+                        add mandatory runbook step.</li>
+                <li><strong>Synthetic Monitoring:</strong>
+                        <ul>
+                                <li>Synthetic HTTP ping check working for DNS/VIP check.</li>
+                                <li>Synthetic ICMP check working for Ashburn and AWS servers.</li>
+                                <li><span style="color: rgb(200,0,0);">Synthetic multi-step workflow monitors
+                                                <strong>still pending implementation</strong> for GovM workflows.</span>
+                                </li>
+                        </ul>
+                </li>
+        </ul>
+
+        <h2 style="color: rgb(200,0,0);">⚠️ SpeakUp — Application at Risk (Roadmap Needed)</h2>
+        <ul>
+                <li><strong>Still monitored in New Relic (not Elastic)</strong> — old Ruby version incompatible with
+                        Elastic agent. NR decommission on hold.</li>
+                <li><strong>MongoDB version very old — no upgrades possible</strong>; 50M+ DB users with anonymous
+                        comments. Cursor exhaustion and slow queries recurring.</li>
+                <li><strong>Recurring performance issues in Feb 2026:</strong> Feb 3 slow MongoDB query (RUN-117083),
+                        Feb 5 host socket errors (RUN-117382), Feb 27 spam traffic brief outage (RUN-119192). Same root
+                        pattern: spam users drive excessive profile/comments traffic with no application-layer block.
+                </li>
+                <li><strong>Degradation of SpeakUp can impact Legistar/iLegislate</strong> — downstream dependency risk.
+                </li>
+                <li><strong>Akamai WAF advanced features may help</strong> but require Dev engagement (SRE-13863 —
+                        requires Gerry's Approval, currently BLOCKED).</li>
+                <li><strong>Long-term: SpeakUp application replacement is the only complete fix.</strong> No code
+                        changes in flight for spam blocking. Engineering/Product leadership must prioritize.</li>
+        </ul>
+
+        <h3><span style="color: rgb(0,0,255);">Blockers for SRE</span></h3>
+        <ul>
+                <li><strong>CoreDNS monitoring gap — SRE-17654 Open. Priority: HIGH</strong> (contributed to extended
+                        MTTR in Jan Sev 1 incidents)</li>
+                <li><strong>SpeakUp Elastic agent incompatibility</strong> (old Ruby) blocking NR decommission</li>
+        </ul>
+
+        <table class="confluenceTable">
+                <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                </colgroup>
+                <tbody>
+                        <tr>
+                                <th class="confluenceTh">Ticket (Monitoring)</th>
+                                <th class="confluenceTh">Description</th>
+                                <th class="confluenceTh">SRE owner</th>
+                                <th class="confluenceTh">Status</th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SRE-17654">SRE-17654</a></td>
+                                <td class="confluenceTd">CoreDNS Monitoring &amp; Alerting — add metric-based monitoring
+                                        for CoreDNS resources, pod restarts, event log anomalies; add Elastic/PD alerts
+                                        for early detection of CoreDNS degradation</td>
+                                <td class="confluenceTd">SRE / Sheldon</td>
+                                <td class="confluenceTd"><span style="color: rgb(200,0,0);"><strong>OPEN — HIGH
+                                                        PRIORITY</strong></span></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SRE-17751">SRE-17751</a></td>
+                                <td class="confluenceTd">OneMeeting compiler Green2 queue depth monitoring — alert if
+                                        queue exceeds threshold to prevent compile delay incidents</td>
+                                <td class="confluenceTd">SRE / Abdul</td>
+                                <td class="confluenceTd"><span style="color: rgb(200,0,0);"><strong>OPEN</strong></span>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SRE-17888">SRE-17888</a></td>
+                                <td class="confluenceTd">Recurring PeakAPI pod restarts — track fix to separate
+                                        delayed_jobs worker pods from web pods; add pod restart rate alerting</td>
+                                <td class="confluenceTd">SRE / Naveen</td>
+                                <td class="confluenceTd"><span style="color: rgb(255,165,0);"><strong>IN
+                                                        PROGRESS</strong></span></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SA-134447">SA-134447</a></td>
+                                <td class="confluenceTd">IQM2 Pingdom monitor cleanup — audit all Pingdom monitors
+                                        against active server inventory; add monitor-disable to decommission runbook
+                                </td>
+                                <td class="confluenceTd">SRE / Sheldon</td>
+                                <td class="confluenceTd"><span style="color: rgb(255,165,0);"><strong>IN
+                                                        PROGRESS</strong></span></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SA-103317">SA-103317</a></td>
+                                <td class="confluenceTd">Granicus Video logs on Elastic — Wowza streaming servers &amp;
+                                        CDN endpoints logs to Elastic</td>
+                                <td class="confluenceTd">Chase House</td>
+                                <td class="confluenceTd"><span style="color: rgb(255,165,0);"><strong>IN
+                                                        PROGRESS</strong></span></td>
+                        </tr>
+                </tbody>
+        </table>
+
+        <table class="confluenceTable">
+                <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                </colgroup>
+                <tbody>
+                        <tr>
+                                <th class="confluenceTh">Ticket (SRE Project)</th>
+                                <th class="confluenceTh">Description</th>
+                                <th class="confluenceTh">SRE owner</th>
+                                <th class="confluenceTh">Status</th>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SA-133052">SA-133052</a> /
+                                        SA-133120</td>
+                                <td class="confluenceTd">CoreDNS Fargate profile formalization and autoscaler policy —
+                                        eliminate pod co-location risk on EC2 nodes</td>
+                                <td class="confluenceTd">DevOps / Leah Benner</td>
+                                <td class="confluenceTd"><span
+                                                style="color: rgb(0,128,0);"><strong>COMPLETE</strong></span></td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">SA-133121</td>
+                                <td class="confluenceTd">Codify CoreDNS regex rules; explore moving to alternate DNS
+                                        service; add guardrails for future Logstash/DNS pattern changes with pre-prod
+                                        validation</td>
+                                <td class="confluenceTd">App Eng + DevOps</td>
+                                <td class="confluenceTd"><span style="color: rgb(200,0,0);"><strong>OPEN</strong></span>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SA-133857">SA-133857</a></td>
+                                <td class="confluenceTd">Add throttle/rate limiting to OneMeeting migration API to
+                                        prevent compiler queue overload</td>
+                                <td class="confluenceTd">DevOps / Primgov</td>
+                                <td class="confluenceTd"><span style="color: rgb(0,128,0);"><strong>DONE</strong></span>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd">DBA-9382</td>
+                                <td class="confluenceTd">DBA — Evaluate Heracles RDS sizing and optimize DB following
+                                        changes made during Jan 2026 Sev 1 incidents</td>
+                                <td class="confluenceTd">DBA / Bodavula Meghasai</td>
+                                <td class="confluenceTd"><span style="color: rgb(0,128,0);"><strong>DONE</strong></span>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td class="confluenceTd"><a
+                                                href="https://jira.granicus.com/browse/SRE-13863">SRE-13863</a></td>
+                                <td class="confluenceTd">GovM WAF Implementation: Insite/Legistar/MediaManager/SpeakUp
+                                        (Ashburn)</td>
+                                <td class="confluenceTd">Sheldon</td>
+                                <td class="confluenceTd"><span style="color: rgb(200,0,0);"><strong>Requires Gerry's
+                                                        Approval — BLOCKED</strong></span></td>
+                        </tr>
+                </tbody>
+        </table>
+        <p><br></p>
+        <p>&nbsp;</p>
+
+
+</body>
+
+
+</html>
