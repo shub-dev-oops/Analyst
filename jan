@@ -1,0 +1,576 @@
+<p>&nbsp;</p>
+<p>January 2026 - SRE Incident Review</p>
+<h2><strong>Agenda:</strong></h2>
+<table><colgroup><col /></colgroup>
+<tbody>
+<tr>
+<th>
+<h4 class="blue">-- Incident review 1st Jan 2026 till 31st Jan 2026</h4>
+<pre>  - identify key improvement areas to reduce production incidents, Improve customer experience</pre>
+<ul>
+<li><a href="https://confluence.granicus.com/display/SRE/GovM+Action+Plan+for+Repeated+Sev+Incidents">GovM Action Plan for Repeated Sev Incidents</a></li>
+<li><a href="https://confluence.granicus.com/pages/viewpage.action?pageId=586350808">GovM Engineering Feedback on APM 4xx/5xx/other Errors</a></li>
+</ul>
+<h4><strong>-- </strong><span class="blue">Meeting Notes &amp; Action Items from Last discussions</span></h4>
+<h4>-- <span class="blue">identify monitoring gaps, Implement monitoring &amp; Alerting to reduce customer reported incidents</span></h4>
+<ul>
+<li><a href="https://confluence.granicus.com/display/SRE/GovM+Monitoring+Improvements+to+reduce+Customer+Reported+Tickets">GovM Monitoring Improvements to reduce Customer Reported Tickets</a></li>
+<li><a href="https://confluence.granicus.com/display/SRE/GovM+SSL+Certs+Monitoring+on+Elastic">GovM SSL Certs Monitoring on Elastic</a></li>
+</ul>
+<h4>-- <span class="blue">SLO status update</span></h4>
+</th>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Severity 1 Incidents</span></strong></h3>
+<table>
+<thead>
+<tr style="height: 16px;">
+<th style="width: 15%; height: 16px;">Application / Ticket</th>
+<th style="width: 30%; height: 16px;">Root Cause for Problem</th>
+<th style="width: 30%; height: 16px;">Resolution &amp; Linked Tickets</th>
+<th style="width: 25%; height: 16px;">Meeting Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 457.188px;">
+<td style="height: 457.188px;"><strong>Media Manager / govMeetings Platform</strong><br /> <a href="https://jira.granicus.com/browse/RUN-115998"><strong>RUN-115998</strong></a><br /> Media Manager Login High Latency<br /> <span class="badge sev1">SEV 1</span> | Jan 23, 2026<br /> <small>Assignee: Dussa Sairam</small></td>
+<td style="height: 457.188px;"><strong>CoreDNS saturation in EKS caused platform-wide login failures and high latency across all govMeetings apps.</strong><br /><br /> <strong>RCA Tickets:</strong> <a href="https://jira.granicus.com/browse/RCA-5546">RCA-5546</a>, <a href="https://jira.granicus.com/browse/RCA-5586">RCA-5586</a><br /><br />
+<ul>
+<li>Multiple GovMeetings applications experienced severe login failures starting ~8:05 AM CST on Jan 23, following overnight releases CR-32634 (Media Manager Reports) and CR-32613 (Swagit-api)</li>
+<li>Investigation traced the issue to CoreDNS resource saturation causing intermittent readiness probe failures in the EKS cluster</li>
+<li>Since Heracles (central auth) depends on CoreDNS, all downstream apps degraded</li>
+<li>Initial fix on Jan 23 scaled CoreDNS resources (memory &times;3, CPU &times;5, pods 2&rarr;3) but this was a band-aid &mdash; the true root cause was DNS query amplification from Kubernetes ndots=5 behavior combined with increased Logstash activity from the Swagit release</li>
+<li>The issue recurred Jan 26 under RUN-116253 and was definitively resolved by a CoreDNS regex rewrite rule</li>
+</ul>
+<strong>MTTA: 31 min | MTTR: 846 min (~14 hrs)</strong></td>
+<td style="height: 457.188px;">
+<p><strong>Immediate:</strong>&nbsp;Moved CoreDNS to Fargate with autoscaling (min 4 pods, scaled to 12)</p>
+<p><strong>Permanent:</strong>&nbsp;CoreDNS regex rewrite rule implemented to collapse Logstash DNS query patterns. Codify regex rules for future Logstash/DNS patterns</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/SA-133052">SA-133052</a>&nbsp;(CoreDNS autoscaling),&nbsp;<a href="https://jira.granicus.com/browse/SA-133121">SA-133121</a>&nbsp;(codify regex rules),&nbsp;<a href="https://jira.granicus.com/browse/RCA-5586">RCA-5586</a>&nbsp;(RCA completed)</p>
+<p><strong>Monitoring:</strong>&nbsp;Add log-based alerts for "Amazon S3 read fail" and DNS query amplification patterns</p>
+</td>
+<td style="height: 457.188px;"><span class="badge inprogress">IN PROGRESS</span><br /><br /> <strong>[Jan 30]</strong> Vijayeendra confirmed cause updated to Operational Configuration. The Jan 23 CoreDNS scaling was a band-aid &mdash; real root cause was DNS amplification from Swagit release + ndots=5. Full story documented under RUN-116253.<br /><br /> <strong>[Jan 26]</strong> Sheldon confirmed latency returned to normal baseline across all APM services (heracles, mediamanager-php, peakapi, boule, chronus, hypatia) post CoreDNS scaling.<br /><br /> External RCA ([RCA-5546]) under Peer Leadership review. Support advised to send both RCA-5546 and RCA-5586 together once available.<br /><br /> <strong>Open:</strong> SA-133052 (CoreDNS autoscaling), SRE-17688 (Elastic monitoring), SRE-17681 (Cloudwatch RDS) still in progress.</td>
+</tr>
+<tr style="height: 481px;">
+<td style="height: 481px;"><strong>Media Manager / govMeetings Platform</strong><br /> <a href="https://jira.granicus.com/browse/RUN-116253"><strong>RUN-116253</strong></a><br /> Multiple govM Apps &mdash; Latency &amp; Login Errors<br /> <span class="badge sev1">SEV 1</span> | Jan 26-27, 2026<br /> <small>Assignee: Sheldon Rampton</small></td>
+<td style="height: 481px;"><strong>DNS query amplification from Swagit release flooded CoreDNS via Kubernetes ndots=5 behavior.</strong><br /><br /> <strong>RCA Ticket:</strong> <a href="https://jira.granicus.com/browse/RCA-5586">RCA-5586</a><br /><br />
+<ul>
+<li>Same symptoms as RUN-115998 returned &mdash; 30+ second page loads, 504 errors, failed logins across Media Manager, Heracles, Swagit, Peak, iLegislate, Legistar, and Boards &amp; Commissions</li>
+<li>The Swagit-api release (CR-32613) had increased Logstash activity</li>
+<li>Due to Kubernetes ndots=5 DNS search behavior, every Logstash DNS call expanded into 6 sequential lookups, flooding CoreDNS</li>
+<li>CoreDNS pods were also co-located on a few EC2 nodes, hitting VPC ENI packet-per-second limits</li>
+<li>Scaling CoreDNS 2&rarr;3&rarr;8 pods and Heracles to 24 pods provided no lasting relief</li>
+<li>AWS EKS specialist (Jaylen Steward) recommended moving CoreDNS to Fargate</li>
+<li>The decisive fix was a CoreDNS regex rewrite rule collapsing the repetitive Logstash DNS lookups &mdash; confirmed by remove-and-reapply test (latency returned in 2 min after removal, cleared in 1 min after re-deployment)</li>
+</ul>
+<strong>MTTA: 30 min | MTTR: 720 min (~12 hrs)</strong></td>
+<td style="height: 481px;">
+<p><strong>Immediate:</strong>&nbsp;Moved CoreDNS to Fargate with autoscaling (min 4 pods, scaled to 12)</p>
+<p><strong>Permanent:</strong>&nbsp;CoreDNS regex rewrite rule implemented to collapse Logstash DNS query patterns. Codify regex rules for future Logstash/DNS patterns</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/SA-133052">SA-133052</a>&nbsp;(CoreDNS autoscaling),&nbsp;<a href="https://jira.granicus.com/browse/SA-133121">SA-133121</a>&nbsp;(codify regex rules),&nbsp;<a href="https://jira.granicus.com/browse/RCA-5586">RCA-5586</a>&nbsp;(RCA completed)</p>
+<p><strong>Monitoring:</strong>&nbsp;Add log-based alerts for "Amazon S3 read fail" and DNS query amplification patterns</p>
+&nbsp;</td>
+<td style="height: 481px;"><span class="badge inprogress">IN PROGRESS</span><br /><br /> <strong>[Jan 30]</strong> Vijayeendra confirmed cause: Operational Configuration. The regex rewrite rule was the definitive fix &mdash; tested by removing it (latency returned in 2 min) and re-deploying (latency cleared in 1 min). Shrikant confirmed the regex fix, not the Fargate migration, was what resolved the outage.<br /><br /> <strong>[Jan 27]</strong> Chris Nigh: decisive fix was CoreDNS regex rules collapsing repetitive Logstash-driven DNS lookups caused by Swagit release CR-32613. Services returned to normal while a smaller Heracles app/DB latency path was queued for follow-up.<br /><br /> External RCA ([RCA-5586]) resolved Feb 5. Kelly Price: support to send both RCA-5546 and RCA-5586 together.<br /><br /> <strong>Open:</strong> SA-133121 (long-term DNS), SA-134633/34 (KEDA autoscaling for Heracles) still in progress.</td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Severity 2 Incidents</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 15%;">Application / Ticket</th>
+<th style="width: 30%;">Root Cause for Problem</th>
+<th style="width: 30%;">Resolution &amp; Linked Tickets</th>
+<th style="width: 25%;">Meeting Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SpeakUp</strong><br /> <a href="https://jira.granicus.com/browse/RUN-116311"><strong>RUN-116311</strong></a><br /> SpeakUp US DOWN<br /> <span class="badge sev2">SEV 2</span> | Jan 26, 2026<br /> <small>Assignee: Dussa Sairam</small></td>
+<td><strong>Legitimate citizen traffic surge overwhelmed 2 SpeakUp nodes, causing intermittent downtime totalling ~38 minutes.</strong><br /><br />
+<ul>
+<li>SpeakUp US experienced intermittent downtime across multiple short windows between 4:17 PM &ndash; 5:38 PM (38 minutes total impact)</li>
+<li>Two nodes went unhealthy</li>
+<li>Investigation in New Relic revealed a high volume of legitimate citizen comments being posted to sacramento.granicusideas.com in response to a politically charged City Council agenda item scheduled for the following day</li>
+<li>The traffic surge was not spam &mdash; all comments were verified as legitimate</li>
+<li>The load exceeded what the 2 affected nodes could handle</li>
+<li>No manual intervention was taken as the traffic was legitimate and restarting nodes would not have helped</li>
+</ul>
+<strong>MTTA: 1 min | MTTR: 37 min</strong></td>
+<td>
+<p><strong>Temporary:</strong>&nbsp;Service auto-recovered after traffic subsided; nodes cycled</p>
+<p><strong>Permanent:</strong>&nbsp;Evaluate capacity planning for high-profile meetings; consider autoscaling improvements for SpeakUp AWS infrastructure</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/RCA-5596">RCA-5596</a>&nbsp;(RCA not needed),&nbsp;<a href="https://jira.granicus.com/browse/RUN-119192">RUN-119192</a>&nbsp;(related ticket)</p>
+<p><strong>Note:</strong>&nbsp;Legitimate traffic, not spam/bot attack per New Relic analysis</p>
+</td>
+<td><span class="badge inprogress">IN PROGRESS</span><br /><br /> <strong>[Jan 27]</strong> Sheldon confirmed: high volume of legitimate citizen comments on Sacramento SpeakUp page (City Council meeting next day). Not spam. Restarting nodes would not have helped &mdash; correct call to let it auto-resolve.<br /><br /> Cause coded as Granicus Software Defect &mdash; nodes could not handle the traffic spike. No RCA ticket raised.<br /><br /> <strong>Open:</strong> No autoscaling in place for SpeakUp. DevOps to assess feasibility.</td>
+</tr>
+<tr>
+<td><strong>Media Manager / Swagit</strong><br /> <a href="https://jira.granicus.com/browse/RUN-116706"><strong>RUN-116706</strong></a><br /> Video Archive 500 Errors<br /> <span class="badge sev2">SEV 2</span> | Jan 30 &ndash; Feb 3, 2026<br /> <small>Assignee: Chase House</small></td>
+<td><strong>Corrupt/truncated MP4 files from customer ci-ssf-ca caused Wowza to request invalid S3 byte ranges, generating HTTP 500 errors across all 10 archive nodes.</strong><br /><br /> <strong>RCA Ticket:</strong> <a href="https://jira.granicus.com/browse/RCA-5649">RCA-5649</a><br /><br />
+<ul>
+<li>HTTP 500 errors were detected on Swagit/Media Manager archived video playback nodes (Wowza-based, 10 nodes behind AWS LB) for approximately 24 hours before the Jan 30 bridge</li>
+<li>Some videos played successfully on certain nodes but failed on others; at one point all 10 nodes showed as unhealthy simultaneously</li>
+<li>Root cause traced to two corrupt/truncated MP4 files uploaded by customer ci-ssf-ca: the files' mdat atoms claimed more data than the files actually contained</li>
+<li>Files were truncated during transfer &mdash; original 7-hour recordings completed successfully, but the file copy was interrupted before completion</li>
+<li>This caused Wowza to request invalid byte ranges from S3, returning 500 errors</li>
+<li>Two files were recovered using ffmpeg (recovering 2h 41m and 5h 21m of content respectively)</li>
+<li>An SOP was created for future detection and remediation</li>
+</ul>
+<strong>MTTA: 23 min | MTTR: 60 min</strong></td>
+<td>
+<p><strong>Immediate:</strong>&nbsp;Node 7 isolated from load balancer and rebooted; corrupted MP4 files recovered using ffmpeg</p>
+<p><strong>Permanent:</strong>&nbsp;SOP created for detection and remediation; vendor support case opened with Wowza for underlying software issue</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/RCA-5649">RCA-5649</a>&nbsp;(RCA Resolved),&nbsp;<a href="https://jira.granicus.com/browse/SA-133376">SA-133376</a>&nbsp;(RUN assist - Done)</p>
+<p><strong>Related:</strong>&nbsp;Multiple linked tickets RUN-116728 through RUN-116740 (customer reports), RUN-117131</p>
+</td>
+<td><span class="badge done">RESOLVED</span><br /><br /> <strong>[Feb 3]</strong> Chase House: two corrupted MP4 files successfully recovered. Root cause confirmed &mdash; files truncated during transfer (mdat atom mismatch). Wowza requested invalid S3 byte ranges as a result. SOP created.<br /><br /> <strong>[Feb 3]</strong> Pallavi Golecha: MTTA updated (was 0, corrected to 23 min as customer-reported). Chase House to close ticket.<br /><br /> <strong>[Jan 30]</strong> Vijayeendra: services confirmed stable after node isolation and reboots. Follow-up with Wowza vendor in progress.<br /><br /> <strong>Open:</strong> Wowza vendor follow-up for long-term mitigation still pending. File integrity validation on upload not yet implemented.</td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Severity 3 Incidents</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 15%;">Application / Ticket</th>
+<th style="width: 30%;">Root Cause for Problem</th>
+<th style="width: 30%;">Resolution &amp; Linked Tickets</th>
+<th style="width: 25%;">Meeting Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IQM2 (Canada)</strong><br /> <a href="https://jira.granicus.com/browse/RUN-115786"><strong>RUN-115786</strong></a><br /> IQM2 Reginask Site Fluctuating<br /> <span class="badge sev3">SEV 3</span> | Jan 21, 2026<br /> <small>Assignee: Chase House</small></td>
+<td><strong>Misconfigured SQL Listener IP in AWS after server upsize CR caused IQM2 Web 2 to fail all backend database connections.</strong><br /><br /> <strong>RCA Ticket:</strong> <a href="https://jira.granicus.com/browse/RCA-5527">RCA-5527</a><br /><br />
+<ul>
+<li>The Canada IQM2 environment experienced intermittent errors whenever traffic was routed to IQM2 Web 2</li>
+<li>End users saw "oops" error pages or slow/hanging page loads; IQM2 Web 1 continued to function normally</li>
+<li>The issue appeared after a scheduled CR that upsized one of the web servers in AWS</li>
+<li>System metrics (CPU, memory, IIS health) on both nodes were normal, pointing to a connectivity or configuration issue</li>
+<li>Detailed review of SQL Always On listener configuration revealed the listener IP was not updated correctly for Web 2 after the upsize</li>
+<li>This caused the node to fail all connections to backend SQL databases (MiniTrack service DB and customer databases including Regina SK)</li>
+<li>Web 2 was removed from the load balancer while DevOps and DBA investigated</li>
+</ul>
+<strong>MTTA: 0 min | MTTR: 16 min (bridge: ~7 hrs)</strong></td>
+<td>
+<p><strong>Immediate:</strong>&nbsp;SQL listener IPs updated to non-reserved ".5" addresses; host file mappings validated and cleaned</p>
+<p><strong>Permanent:</strong>&nbsp;Document and standardize SQL listener IP configuration across all nodes; create AWS reserved IP guidance</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/RCA-5527">RCA-5527</a>&nbsp;(RCA Resolved),&nbsp;<a href="https://jira.granicus.com/browse/SA-132984">SA-132984</a>&nbsp;(Atlas server check - Done),&nbsp;<a href="https://jira.granicus.com/browse/DBA-9340">DBA-9340</a>&nbsp;(DBA-MSSQL - Done)</p>
+</td>
+<td><span class="badge done">RESOLVED</span><br /><br /> <strong>[Jan 21]</strong> Raymond Thompson: environment stable, both web nodes in service behind LB, monitoring in place. [RCA-5527] resolved Jan 22.<br /><br /> Root cause confirmed: SQL listener IP misconfigured after server upsize CR. Cause coded as Operational Configuration.<br /><br /> <strong>Open:</strong> CR runbook update for SQL listener verification not yet confirmed. DevOps to confirm.</td>
+</tr>
+<tr>
+<td><strong>iLegislate</strong><br /> <a href="https://jira.granicus.com/browse/RUN-115749"><strong>RUN-115749</strong></a><br /> iLegislate DOWN &mdash; Socket Timeout<br /> <span class="badge sev3">SEV 3</span> | Jan 20, 2026<br /> <small>Assignee: Shrikant Dandge</small></td>
+<td><strong>Third-party dependency joliet.granicus.com:443 went 100% unavailable, causing cascading latency and socket timeouts in iLegislate.</strong><br /><br />
+<ul>
+<li>iLegislate went down for 5 minutes with socket timeout errors</li>
+<li>A clear latency spike was observed at 15:51&ndash;15:53</li>
+<li>Key transactions showed severe degradation (LegacyAgendasController#show at 8,015ms, LegacyAgendasController#index at 6,581ms, LegacySyncController#sync at 6,489ms)</li>
+<li>APM dependency analysis identified joliet.granicus.com:443 as the smoking gun &mdash; 100% failure rate with 1,153ms latency</li>
+<li>The dependency govmeetings-mediamanager also showed 14% failure rate</li>
+<li>CoreDNS, EKS ingresses, and AWS LB Controller were all confirmed healthy</li>
+<li>The service auto-recovered within 5 minutes</li>
+<li>Error in Elastic APM: "Failed to open TCP connection to Aurora.granicus:80 (getaddrinfo: Name or service not known)"</li>
+</ul>
+<strong>MTTA: 1 min | MTTR: 5 min</strong></td>
+<td>
+<p><strong>Temporary:</strong>&nbsp;Service recovered after 5 minutes when third-party dependency restored</p>
+<p><strong>Permanent:</strong>&nbsp;Evaluate dependency resilience and circuit breaker patterns for external service calls</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/RCA-5524">RCA-5524</a>&nbsp;(RCA not needed)</p>
+<p><strong>Note:</strong>&nbsp;Exception: "Failed to open TCP connection to Aurora.granicus:80 (getaddrinfo: Name or service not known)"</p>
+</td>
+<td><span class="badge done">RESOLVED</span><br /><br /> <strong>[Jan 20]</strong> Shrikant Dandge: followed SOP. CoreDNS, EKS ingresses, AWS LB Controller all healthy. Recovered after 5 minutes. Chris Nigh confirmed: 01/20/2026 03:50:30 PM &ndash; 03:55:30 PM (5 minutes).<br /><br /> Cause coded as Third Party Defect. No RCA ticket created.<br /><br /> <strong>Open:</strong> No monitoring on joliet.granicus.com. DevOps/SRE to confirm what this dependency is and whether monitoring exists.</td>
+</tr>
+<tr>
+<td><strong>Media Manager (Canada)</strong><br /> <a href="https://jira.granicus.com/browse/RUN-114976"><strong>RUN-114976</strong></a><br /> Media Manager CA .NET DOWN<br /> <span class="badge sev3">SEV 3</span> | Jan 9, 2026<br /> <small>Assignee: Dussa Sairam</small></td>
+<td><strong>Chef Client upgrade maintenance activity inadvertently disrupted application services on the Canada Media Manager .NET endpoint.</strong><br /><br />
+<ul>
+<li>The Canada Media Manager .NET endpoint (supportlab.ca.granicus.com) went down briefly and auto-recovered within 2&ndash;4 minutes without any manual intervention</li>
+<li>Root cause was a Chef Client upgrade in progress as a scheduled maintenance activity</li>
+<li>The upgrade inadvertently impacted application services, causing temporary unavailability</li>
+<li>SRE validated Pingdom and synthetic monitors, update-time monitors &mdash; all confirmed healthy post-recovery</li>
+<li>The exact CR causing the flap was not confirmed at the time of closure</li>
+<li>Cause was updated from "Operational Change" to "Operational Process" after review by Vijayeendra as no specific CR could be identified during the timeframe</li>
+</ul>
+<strong>MTTA: 1 min | MTTR: 2 min</strong></td>
+<td>
+<p><strong>Temporary:</strong>&nbsp;Auto-recovery after Chef client upgrade completed</p>
+<p><strong>Permanent:</strong>&nbsp;Review Chef upgrade scheduling and impact on production services; validate change control documentation</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/RCA-5458">RCA-5458</a>&nbsp;(RCA not needed)</p>
+<p><strong>Note:</strong>&nbsp;Cause updated from "Operational Change" to "Operational Process" for reporting accuracy</p>
+</td>
+<td><span class="badge done">RESOLVED</span><br /><br /> <strong>[Jan 12]</strong> Vijayeendra: cause updated to Operational Process. Could not confirm the specific CR during the timeframe. SRE team could not verify the original reason for "Operational Change" selection at closure.<br /><br /> <strong>[Jan 9]</strong> Dussa Sairam: auto-recovered in 2/4 mins. Pingdom and synthetic monitors all healthy.<br /><br /> No further action required. Closed.</td>
+</tr>
+<tr>
+<td><strong>OneMeeting (CVRD)</strong><br /> <a href="https://jira.granicus.com/browse/RUN-115672"><strong>RUN-115672</strong></a><br /> OneMeeting Cowichan Valley DOWN<br /> <span class="badge sev3">SEV 3</span> | Jan 19, 2026<br /> <small>Assignee: Santanu Chatterjee</small></td>
+<td><strong>Sudden traffic surge exhausted IIS CPU and memory on the Cowichan Valley Regional District OneMeeting web servers, causing socket timeouts for ~9 minutes.</strong><br /><br />
+<ul>
+<li>The CVRD OneMeeting site became inaccessible for approximately 9 minutes (09:32&ndash;09:41 AM CT)</li>
+<li>Synthetic monitor failed on the login page with timeout errors</li>
+<li>No customer complaints were received</li>
+<li>During the incident window, incoming requests spiked from a normal baseline to approximately 700 requests in a short timeframe</li>
+<li>This surge exhausted CPU and memory on the IIS web servers &mdash; w3wp.exe processes under the multitenant application pool consumed near 100% of system resources</li>
+<li>No CPU spikes were observed in Elastic metrics at the outage time, no server-level alerts triggered from Azure or infrastructure monitoring, and no widespread OneMeeting service disruption occurred</li>
+<li>The service auto-recovered once the surge subsided</li>
+<li>No manual intervention was required</li>
+</ul>
+<strong>MTTA: 6 min | MTTR: 9 min</strong></td>
+<td><strong>What we did to fix it:</strong><br /><br /> <strong>Temporary fix:</strong> Auto-recovered without manual intervention. SRE verified via synthetic relaunch that all login steps were succeeding post-recovery.<br /><br /><br /></td>
+<td><span class="badge done">RESOLVED</span><br /><br /> <strong>[Jan 19]</strong> Vijayeendra: site accessible. Issue isolated to CVRD OneMeeting only. Bridge ended. SRE to investigate RCA offline.<br /><br /> <strong>[Jan 19]</strong> Santanu Chatterjee: sudden request surge (baseline &rarr; ~700 requests) exhausted IIS CPU/memory. w3wp.exe consumed near 100% resources. Auto-recovered once surge subsided.<br /><br /> Cause coded as Operational Capacity. No RCA ticket raised (auto-resolved, no customer complaints).<br /><br /> <strong>Open:</strong> IIS pool throttling and autoscaling assessment not yet done. Santanu Chatterjee to own follow-up.</td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Severity 4 Incidents</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 15%;">Application / Ticket</th>
+<th style="width: 30%;">Root Cause for Problem</th>
+<th style="width: 30%;">Resolution &amp; Linked Tickets</th>
+<th style="width: 25%;">Meeting Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OneMeeting (Helo Encoders)</strong><br /> <a href="https://jira.granicus.com/browse/RUN-115814"><strong>RUN-115814</strong></a><br /> Encoder SSL Certificate Expiry<br /> <span class="badge sev4">SEV 4</span> | Jan 21-22, 2026<br /> <small>Assignee: Kyle Kowalski</small></td>
+<td><strong>SSL certificate renewal PEM for OneMeeting Helo encoders was packaged incorrectly &mdash; missing the private key &mdash; due to an undocumented non-standard requirement, putting ~101 encoder customers at risk of losing livestream capability.</strong><br /><br />
+<ul>
+<li>The SSL certificate for *.encoders.primegov.com was expiring Jan 22, 2026</li>
+<li>The replacement PEM distributed to ~101 OneMeeting Helo/Helo+ encoder customers was invalid because it contained only the public certificate and lacked the matching private key</li>
+<li>The IE team followed standard PEM packaging practice (public cert only), but the Helo encoder requires a non-standard PEM containing both the public certificate AND the private key &mdash; this requirement was undocumented</li>
+<li>Customers began reporting errors when attempting to install the new certificate</li>
+<li>The correct certificate and private key were located in HashiCorp Vault, a combined PEM was rebuilt and validated with a customer encoder (OKC)</li>
+<li>The corrected file was redistributed before the expiry deadline</li>
+<li>No outage occurred</li>
+<li>Next expiry: *.encoders.primegov.com expires 2027-01-12</li>
+</ul>
+<strong>MTTA: 60 min | MTTR: 121 min</strong></td>
+<td>
+<p><strong>Immediate:</strong>&nbsp;SA ticket created for DevOps to correct admin test customer integration to Prime Gov</p>
+<p><strong>Permanent:</strong>&nbsp;Implement change control and audit for admin/test configurations; add pre-flight config check in synthetic</p>
+<p><strong>Linked Tickets:</strong>&nbsp;<a href="https://jira.granicus.com/browse/SA-131742">SA-131742</a>&nbsp;(Integration Error fix - Done),&nbsp;<a href="https://jira.granicus.com/browse/RCA-5437">RCA-5437</a>&nbsp;(RCA not needed)</p>
+</td>
+<td><span class="badge inprogress">IN PROGRESS</span><br /><br /> <strong>[Jan 22]</strong> Vijayeendra: status page updated. Corrected PEM distributed. No outage occurred &mdash; resolved before expiry.<br /><br /> <strong>[Jan 22]</strong> Kyle Kowalski: "This is a unicorn of a PEM &mdash; it has both the end entity certificate (expected) and the private key (very much NOT expected in a PEM). This process needs to be documented WELL."<br /><br /> <strong>Open:</strong> [SRE-17638] still open. Runbook documentation for the non-standard PEM requirement not yet confirmed as complete. Next cert expiry: 2027-01-12 &mdash; calendar reminders to be set.</td>
+</tr>
+<tr>
+<td><strong>Swagit / OneMeeting</strong><br /> <a href="https://jira.granicus.com/browse/RUN-114754"><strong>RUN-114754</strong></a><br /> Swagit&ndash;OneMeeting Integration HTTP 500<br /> <span class="badge sev4">SEV 4</span> | Jan 5, 2026<br /> <small>Assignee: Balvindarsingh Rathod</small></td>
+<td><strong>Internal synthetic monitor for Swagit&ndash;OneMeeting integration failed due to a misconfiguration in the admin test environment pointing to Destiny Cloud instead of Prime Gov &mdash; no production customer impact.</strong><br /><br />
+<ul>
+<li>An internal synthetic monitor for the Swagit "OneMeeting" integration began returning HTTP 500 &mdash; "Unable to load meetings" &mdash; for the admin test customer</li>
+<li>Multiple real production customers (Beaumont, Gilroy) were verified as unaffected; meeting imports and creation worked normally</li>
+<li>Investigation revealed the admin test customer was configured to integrate with Destiny Cloud instead of Prime Gov, causing the synthetic monitor to fail</li>
+<li>The incident was downgraded to Sev-4, assigned to [SA-131742] for DevOps to correct the integration setting, and the bridge was closed with no production impact</li>
+</ul>
+<strong>MTTA: 1 min | MTTR: 19 min</strong></td>
+<td><strong>What we did to fix it:</strong><br /><br /> <strong>Temporary fix:</strong> Admin test customer integration setting corrected from Destiny Cloud to Prime Gov via [SA-131742].<br /><br /> <strong>Permanent solution ideas:</strong>
+<ul>
+<li>Review admin test environment configurations periodically to ensure they reflect valid integration targets and do not trigger false-positive synthetic monitor alerts</li>
+</ul>
+</td>
+<td><span class="badge done">RESOLVED</span><br /><br /> <strong>[Jan 5]</strong> Balvindarsingh Rathod: no production customer impact. Admin test env misconfigured (Destiny Cloud vs Prime Gov). [SA-131742] created for DevOps to fix integration setting. Bridge closed.<br /><br /> Chris Nigh: synthetic check had been stable for months before failing that day &mdash; confirms this was a configuration drift in the test environment.<br /><br /> No further action required. Closed.</td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">MTTA / MTTR Summary &mdash; January 2026</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th>Issue Key</th>
+<th>Severity</th>
+<th>Summary</th>
+<th>MTTA</th>
+<th>MTTR</th>
+<th>Product</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-115998">RUN-115998</a></td>
+<td><span class="badge sev1">SEV 1</span></td>
+<td>Media Manager Login High Latency</td>
+<td>31 min</td>
+<td>846 min</td>
+<td>Media Manager / govM Platform</td>
+<td>Resolved; RCA-5546/5586 resolved; SA-133052 in progress</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-116253">RUN-116253</a></td>
+<td><span class="badge sev1">SEV 1</span></td>
+<td>Multiple govM Apps &mdash; High Latency &amp; Login Errors</td>
+<td>30 min</td>
+<td>720 min</td>
+<td>govM Platform-wide</td>
+<td>Resolved; RCA-5586 resolved; SA-133121/SA-134633 in progress</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-116311">RUN-116311</a></td>
+<td><span class="badge sev2">SEV 2</span></td>
+<td>SpeakUp US DOWN (traffic surge)</td>
+<td>1 min</td>
+<td>37 min</td>
+<td>SpeakUp</td>
+<td>Auto-resolved; autoscaling assessment open</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-116706">RUN-116706</a></td>
+<td><span class="badge sev2">SEV 2</span></td>
+<td>Granicus Video &mdash; 500 Errors on Archive Nodes</td>
+<td>23 min</td>
+<td>60 min</td>
+<td>Media Manager / Swagit (Wowza)</td>
+<td>Resolved; RCA-5649 resolved; Wowza vendor follow-up open</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-115786">RUN-115786</a></td>
+<td><span class="badge sev3">SEV 3</span></td>
+<td>IQM2 Reginask Site Fluctuating</td>
+<td>0 min</td>
+<td>16 min</td>
+<td>IQM2 (Canada)</td>
+<td>Resolved; RCA-5527 resolved; CR runbook update open</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-115749">RUN-115749</a></td>
+<td><span class="badge sev3">SEV 3</span></td>
+<td>iLegislate DOWN &mdash; Socket Timeout</td>
+<td>1 min</td>
+<td>5 min</td>
+<td>iLegislate</td>
+<td>Auto-resolved; joliet.granicus.com monitoring gap open</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-114976">RUN-114976</a></td>
+<td><span class="badge sev3">SEV 3</span></td>
+<td>Media Manager CA .NET DOWN</td>
+<td>1 min</td>
+<td>2 min</td>
+<td>Media Manager (Canada)</td>
+<td>Auto-resolved; closed</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-115814">RUN-115814</a></td>
+<td><span class="badge sev4">SEV 4</span></td>
+<td>OneMeeting Encoder SSL Certificate Expiry</td>
+<td>60 min</td>
+<td>121 min</td>
+<td>OneMeeting (Helo Encoders)</td>
+<td>Resolved before expiry; SRE-17638 open; runbook update pending</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-114754">RUN-114754</a></td>
+<td><span class="badge sev4">SEV 4</span></td>
+<td>Swagit&ndash;OneMeeting Integration HTTP 500</td>
+<td>1 min</td>
+<td>19 min</td>
+<td>Swagit / OneMeeting</td>
+<td>Resolved; admin test env config corrected; closed</td>
+</tr>
+<tr>
+<td><a href="https://jira.granicus.com/browse/RUN-115672">RUN-115672</a></td>
+<td><span class="badge sev3">SEV 3</span></td>
+<td>OneMeeting Cowichan Valley DOWN</td>
+<td>6 min</td>
+<td>9 min</td>
+<td>OneMeeting (CVRD)</td>
+<td>Auto-resolved; IIS autoscaling assessment open</td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Meeting Notes &amp; Action Items (includes tasks from Previous discussions)</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 35%;">Activity List</th>
+<th style="width: 10%;">Type</th>
+<th style="width: 15%;">Owner</th>
+<th style="width: 30%;">Remarks</th>
+<th style="width: 10%;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete CoreDNS autoscaling setup with regex rewrite rule validation</td>
+<td>Improvement</td>
+<td>DevOps / SRE</td>
+<td>Confirm regex rewrite rule is stable and won't be inadvertently removed during future CoreDNS config changes. Tracked in SA-133052.</td>
+<td><span class="badge inprogress">WIP</span></td>
+</tr>
+<tr>
+<td>Implement KEDA autoscaling for Heracles</td>
+<td>Improvement</td>
+<td>DevOps / SRE</td>
+<td>Prevent pod count from being a bottleneck during future DNS or auth load spikes. Tracked in SA-134633 and SA-134634.</td>
+<td><span class="badge inprogress">WIP</span></td>
+</tr>
+<tr>
+<td>Improve Elastic log monitoring and Kibana dashboards for govM</td>
+<td>Monitoring</td>
+<td>SRE</td>
+<td>Enable faster detection of CoreDNS / Heracles degradation. Tracked in SRE-17688.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+<tr>
+<td>Set up Cloudwatch monitoring for govM RDS instances</td>
+<td>Monitoring</td>
+<td>SRE / DevOps</td>
+<td>Detect database-related latency before it cascades to application layer. Tracked in SRE-17681.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+<tr>
+<td>Document Helo encoder PEM requirement in certificate renewal runbook</td>
+<td>Documentation</td>
+<td>Kyle Kowalski / SRE</td>
+<td>Non-standard requirement: PEM must include both public cert AND private key. Set calendar reminders for next expiry 2027-01-12. Tracked in SRE-17638.</td>
+<td><span class="badge inprogress">WIP</span></td>
+</tr>
+<tr>
+<td>Assess SpeakUp node autoscaling for traffic spike handling</td>
+<td>Capacity</td>
+<td>DevOps</td>
+<td>Handle unexpected legitimate traffic spikes without nodes going unhealthy. From RUN-116311.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+<tr>
+<td>Follow up with Wowza vendor on invalid S3 byte range handling</td>
+<td>Vendor</td>
+<td>Chase House</td>
+<td>Confirm root cause and drive long-term mitigation for corrupt MP4 files. From RUN-116706.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+<tr>
+<td>Update AWS server upsize CR runbook for IQM2 Canada</td>
+<td>Process</td>
+<td>DevOps</td>
+<td>Include mandatory SQL listener IP verification step post-resize. From RUN-115786.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+<tr>
+<td>Investigate joliet.granicus.com dependency and add monitoring</td>
+<td>Monitoring</td>
+<td>SRE / DevOps</td>
+<td>Identify what this dependency is and add alerting if not already present. From RUN-115749.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+<tr>
+<td>Assess IIS autoscaling for OneMeeting multitenant pool</td>
+<td>Capacity</td>
+<td>Santanu Chatterjee / DevOps</td>
+<td>Investigate IIS pool throttling and whether additional capacity would prevent recurrence. From RUN-115672.</td>
+<td><span class="badge open">OPEN</span></td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Monitoring Status &amp; gaps:</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 20%;">Ticket (Monitoring)</th>
+<th style="width: 45%;">Description</th>
+<th style="width: 20%;">SRE owner</th>
+<th style="width: 15%;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SA-133052</td>
+<td>CoreDNS autoscaling for EKS Cluster</td>
+<td>DevOps / SRE</td>
+<td><span class="badge inprogress">In Progress</span></td>
+</tr>
+<tr>
+<td>SRE-17688</td>
+<td>Improve Elastic log monitoring and Kibana dashboards for govM</td>
+<td>SRE</td>
+<td><span class="badge open">Open</span></td>
+</tr>
+<tr>
+<td>SRE-17681</td>
+<td>Cloudwatch monitoring for govM RDS instances</td>
+<td>SRE / DevOps</td>
+<td><span class="badge open">Open</span></td>
+</tr>
+<tr>
+<td>&mdash;</td>
+<td>joliet.granicus.com availability monitoring</td>
+<td>SRE / DevOps</td>
+<td><span class="badge open">Gap identified</span></td>
+</tr>
+<tr>
+<td>&mdash;</td>
+<td>SpeakUp node capacity/health monitoring</td>
+<td>DevOps</td>
+<td><span class="badge open">Gap identified</span></td>
+</tr>
+<tr>
+<td>&mdash;</td>
+<td>IIS application pool resource monitoring for OneMeeting</td>
+<td>SRE / DevOps</td>
+<td><span class="badge open">Gap identified</span></td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">SRE Projects Status:</span></strong></h3>
+<table>
+<thead>
+<tr>
+<th style="width: 20%;">Ticket (SRE Project)</th>
+<th style="width: 45%;">Description</th>
+<th style="width: 20%;">SRE owner</th>
+<th style="width: 15%;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SA-133121</td>
+<td>Research/implement long-term DNS solution to prevent ndots=5 amplification recurrence</td>
+<td>SRE / DevOps</td>
+<td><span class="badge inprogress">In Progress</span></td>
+</tr>
+<tr>
+<td>SA-134633 / SA-134634</td>
+<td>Implement KEDA autoscaling in Heracles</td>
+<td>DevOps / SRE</td>
+<td><span class="badge inprogress">In Progress</span></td>
+</tr>
+<tr>
+<td>SRE-17638</td>
+<td>OneMeeting Encoder Certificate process documentation</td>
+<td>Kyle Kowalski / SRE</td>
+<td><span class="badge inprogress">In Progress</span></td>
+</tr>
+<tr>
+<td>SA-133119</td>
+<td>Update Heracles resources in source code</td>
+<td>DevOps</td>
+<td><span class="badge done">Done</span></td>
+</tr>
+<tr>
+<td>SA-133122</td>
+<td>Turn off Heracles ALB logging</td>
+<td>DevOps</td>
+<td><span class="badge done">Done</span></td>
+</tr>
+</tbody>
+</table>
+<h3><strong><span class="blue">Key Discussion Points - January 2026</span></strong></h3>
+<ul>
+<li><strong>CoreDNS Latency Crisis (RUN-115998 &amp; RUN-116253):</strong> Two Sev 1 incidents within 3 days revealed that the initial fix (scaling CoreDNS) was not the true root cause. The actual issue was DNS query amplification from Kubernetes ndots=5 behavior combined with increased Logstash activity from the Swagit release. The definitive fix was a CoreDNS regex rewrite rule, confirmed by remove-and-reapply testing.</li>
+<li><strong>Certificate Management Process Gap (RUN-115814):</strong> The Helo encoder SSL certificate renewal revealed an undocumented non-standard requirement &mdash; the PEM must contain both the public certificate AND the private key. This process needs to be documented to prevent future incidents.</li>
+<li><strong>Traffic Spike Handling:</strong> Multiple incidents (SpeakUp RUN-116311, OneMeeting CVRD RUN-115672) highlighted gaps in handling sudden legitimate traffic surges. Autoscaling assessments needed for both SpeakUp nodes and OneMeeting IIS pools.</li>
+<li><strong>Third-Party Dependency Monitoring:</strong> The iLegislate incident (RUN-115749) revealed a dependency on joliet.granicus.com:443 that went 100% unavailable with no existing monitoring. Need to identify and monitor critical external dependencies.</li>
+</ul>
+<h3><strong><span class="blue">Next Steps / Follow-up</span></strong></h3>
+<ul>
+<li>Complete CoreDNS autoscaling setup and validate regex rewrite rule stability in production</li>
+<li>Finalize external RCA documents (RCA-5546 and RCA-5586) for customer communication</li>
+<li>Document Helo encoder PEM requirement and set calendar reminders for next certificate expiry (2027-01-12)</li>
+<li>Assess autoscaling feasibility for SpeakUp and OneMeeting to handle traffic spikes</li>
+<li>Identify and implement monitoring for critical third-party dependencies (joliet.granicus.com, etc.)</li>
+<li>Update CR runbooks to include post-change validation steps (SQL listener IP verification, etc.)</li>
+</ul>
+<hr />
+<p style="font-size: 12px; color: #6b778c;">&nbsp;</p>
+<div id="driveway-chrome-extension-live-view-highlight-container" class="drvwyExtnsn">&nbsp;</div>
+<div id="driveway-chrome-extension-capture-highlight-container" class="drvwyExtnsn">&nbsp;</div>
